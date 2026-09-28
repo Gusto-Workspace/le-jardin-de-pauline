@@ -68,7 +68,14 @@ function HomeBand() {
     <div className="home-band" aria-label="Les rendez-vous du Jardin de Pauline">
       <Image className="home-band__branch" src="/img/home-band-branch.png" alt="" aria-hidden="true" width={1254} height={1254} sizes="58px" />
       <div className="home-band__track">
-        <span>Pâtisseries maison</span><b>•</b><span>Déjeuner</span><b>•</b><span>Brunch</span><b>•</b><span>Salon de thé</span><b>•</b><span>Montauban</span>
+        <div className="home-band__ticker">
+          <div className="home-band__items">
+            <span>Pâtisseries maison</span><b>•</b><span>Déjeuner</span><b>•</b><span>Brunch</span><b>•</b><span>Salon de thé</span><b>•</b><span>Montauban</span>
+          </div>
+          <div className="home-band__items home-band__items--duplicate" aria-hidden="true">
+            <span>Pâtisseries maison</span><b>•</b><span>Déjeuner</span><b>•</b><span>Brunch</span><b>•</b><span>Salon de thé</span><b>•</b><span>Montauban</span>
+          </div>
+        </div>
       </div>
       <Image className="home-band__branch home-band__branch--right" src="/img/home-band-branch.png" alt="" aria-hidden="true" width={1254} height={1254} sizes="58px" />
     </div>

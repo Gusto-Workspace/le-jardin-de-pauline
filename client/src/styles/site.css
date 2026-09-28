@@ -3758,6 +3758,8 @@ body {
   box-shadow: none;
 }
 .home-drinks {
+  position: relative;
+  isolation: isolate;
   grid-template-columns: minmax(0, 0.72fr) minmax(0, 1.28fr);
   gap: clamp(50px, 6vw, 110px);
   padding-top: 145px;
@@ -3773,9 +3775,11 @@ body {
   line-height: 1.62;
 }
 .home-drinks__collage {
+  z-index: 2;
   height: 450px;
-  overflow-x: clip;
+  width: calc(100% + 64px + max(0px, (100vw - 1320px) / 2));
 }
+.home-drinks__copy { z-index: 1; }
 .home-drinks__pink {
   width: 37%;
   height: 80%;
@@ -4118,6 +4122,7 @@ body:has(.home-redesign) .footer-bottom {
   }
   .home-drinks__collage {
     height: 420px;
+    width: calc(100vw - 24px);
   }
   .home-final {
     padding: 110px 24px 120px;
@@ -4151,6 +4156,7 @@ body:has(.home-redesign) .footer-bottom {
   }
   .home-drinks__collage {
     height: 350px;
+    width: calc(100vw - 20px);
   }
   .home-actions .btn {
     width: auto;
@@ -4411,7 +4417,10 @@ body:has(.home-redesign) .footer-bottom {
 }
 
 .home-door { background: var(--paper); }
-.home-door__panel { background: var(--green); }
+.home-door__panel {
+  background: var(--green);
+  z-index: 0;
+}
 .home-door__image,
 .home-door__panel { transition: clip-path 1.02s cubic-bezier(0.22, 1, 0.36, 1); }
 .home-door:not(.is-visible) .home-door__image { clip-path: inset(0 100% 0 0); }

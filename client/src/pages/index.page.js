@@ -7,6 +7,10 @@ import { useScrollReveal } from "@/components/shared.component";
 
 const revealProps = (reveal) => ({ ref: reveal.ref, style: reveal.style, className: reveal.className });
 
+function TitleLine({ as: Element = "span", delay = 0, children }) {
+  return <Element className="home-title-line" style={{ "--line-delay": `${delay}ms` }}><span className="home-title-line__inner">{children}</span></Element>;
+}
+
 export default function HomePage() {
   return (
     <>
@@ -37,13 +41,13 @@ function HomeHero() {
   return (
     <section className="home-hero home-section">
       <div className="home-hero__inner container">
-        <div {...revealProps(copy)} className={`home-hero__copy ${copy.className}`}>
+        <div {...revealProps(copy)} className={`home-hero__copy home-title-host ${copy.className}`}>
           <p className="eyebrow">Le Jardin de Pauline · Montauban</p>
-          <h1><span>Un jardin secret.</span><span>Une pause</span><em>gourmande.</em></h1>
+          <h1><TitleLine>Un jardin secret.</TitleLine><TitleLine delay={85}>Une pause</TitleLine><TitleLine as="em" delay={170}>gourmande.</TitleLine></h1>
           <p className="home-hero__lead">Au détour d’un passage, une cour fleurie, des douceurs maison et le plaisir de prendre le temps.</p>
           <div className="home-actions">
             <Link className="btn" href="/reservation">Réserver une table <span>↗</span></Link>
-            <Link className="btn outline home-secondary-btn" href="/carte-menus">Découvrir la carte <span>→</span></Link>
+            <Link className="btn home-secondary-btn" href="/carte-menus">Découvrir la carte <span>→</span></Link>
           </div>
         </div>
         <div {...revealProps(visual)} className={`home-hero__visual ${visual.className}`}>
@@ -53,7 +57,6 @@ function HomeHero() {
           <div className="home-hero__detail home-image-frame">
             <Image src="/img/home-hero-detail.jpg" alt="Une assiette gourmande servie au Jardin de Pauline" fill sizes="(max-width: 800px) 48vw, 19vw" />
           </div>
-          <Image className="home-flowers home-flowers--hero" src="/img/home-flowers.png" alt="" aria-hidden="true" width={1326} height={1186} />
         </div>
       </div>
     </section>
@@ -73,25 +76,48 @@ function HomeBand() {
 }
 
 function HomeStory() {
-  const collage = useScrollReveal({ threshold: 0.16 });
+  const story = useStoryPlacement();
   const copy = useScrollReveal({ delay: 120, threshold: 0.16 });
 
   return (
-    <section className="home-story home-section container">
-      <div {...revealProps(collage)} className={`home-story__collage ${collage.className}`}>
+    <section ref={story.ref} className={`home-story home-section container${story.placed ? " is-placed" : ""}`}>
+      <div className="home-story__collage">
         <div className="home-story__main home-image-frame"><Image src="/img/home-story.jpg" alt="La cour fleurie et les tables du Jardin de Pauline" fill sizes="(max-width: 800px) 100vw, 47vw" /></div>
         <div className="home-story__interior home-image-frame"><Image src="/img/home-story-interior.jpg" alt="Le décor intérieur chaleureux du salon de thé" fill sizes="(max-width: 800px) 58vw, 23vw" /></div>
         <div className="home-story__tea home-image-frame"><Image src="/img/home-story-tea.jpg" alt="Théières fleuries et vaisselle délicate" fill sizes="(max-width: 800px) 52vw, 18vw" /></div>
       </div>
-      <div {...revealProps(copy)} className={`home-story__copy ${copy.className}`}>
+      <div {...revealProps(copy)} className={`home-story__copy home-title-host ${copy.className}`}>
         <p className="eyebrow">Une adresse un peu cachée</p>
-        <h2><span>Comme à la maison.</span><em>Le jardin en plus.</em></h2>
+        <h2><TitleLine>Comme à la maison.</TitleLine><TitleLine as="em" delay={95}>Le jardin en plus.</TitleLine></h2>
         <p>Entrez dans le Passage du Vieux Palais. Derrière les arches de briques, Pauline vous accueille dans un salon de thé à l’esprit délicat et convivial.</p>
         <p>Une assiette salée, une pâtisserie maison, un thé servi dans une jolie tasse… Ici, la gourmandise accompagne chaque moment de la journée.</p>
         <Link className="text-link" href="/contact">Trouver le jardin <span>→</span></Link>
       </div>
+      <Image className="home-story__botanical" src="/img/home-botanical-branch.png" alt="" aria-hidden="true" width={1024} height={1536} sizes="(max-width: 800px) 60vw, 45vw" />
     </section>
   );
+}
+
+function useStoryPlacement() {
+  const ref = useRef(null);
+  const [placed, setPlaced] = useState(false);
+
+  useEffect(() => {
+    const node = ref.current;
+    if (!node) return undefined;
+    if (!("IntersectionObserver" in window) || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setPlaced(true);
+      return undefined;
+    }
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.intersectionRatio >= 0.16) setPlaced(true);
+      else if (!entry.isIntersecting && entry.boundingClientRect.top >= (entry.rootBounds?.bottom ?? window.innerHeight)) setPlaced(false);
+    }, { threshold: [0, 0.16] });
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, []);
+
+  return { ref, placed };
 }
 
 function HomeMoments() {
@@ -99,10 +125,11 @@ function HomeMoments() {
   const moments = useMomentsFanReveal();
   return (
     <section className="home-moments home-section">
+      <Image className="home-moments__flower" src="/img/home-moments-flower.png" alt="" aria-hidden="true" width={1254} height={1254} />
       <div className="container">
-        <div {...revealProps(heading)} className={`home-moments__heading ${heading.className}`}>
+        <div {...revealProps(heading)} className={`home-moments__heading home-title-host ${heading.className}`}>
           <p className="eyebrow">Nos temps gourmands</p>
-          <h2><span>Du premier thé</span><em>à la dernière bouchée.</em></h2>
+          <h2><TitleLine>Du premier thé</TitleLine><TitleLine as="em" delay={90}>à la dernière bouchée.</TitleLine></h2>
           <p className="home-moments__intro">Trois façons de se régaler au jardin, au fil de la journée.</p>
         </div>
         <div ref={moments.ref} className={`home-moments__grid${moments.open ? " is-open" : ""}`}>
@@ -179,12 +206,22 @@ function HomeMoment({ number, label, title, image, href, children }) {
 function HomeCraft() {
   const copy = useScrollReveal({ threshold: 0.14 });
   const collage = useScrollReveal({ delay: 130, threshold: 0.14 });
+  const parallaxRef = useCraftParallax();
+  const floralMotifs = [
+    ["flower-open", "01"], ["branch-a", "02"], ["branch-b", "03"], ["flower-full", "04"],
+    ["branch-a", "05"], ["flower-full", "06"], ["flower-open", "07"], ["branch-b", "08"],
+    ["flower-open", "09"], ["branch-a", "10"], ["flower-full", "11"], ["branch-b", "12"],
+    ["flower-open", "13"], ["branch-a", "14"],
+  ];
   return (
-    <section className="home-craft home-section">
+    <section ref={parallaxRef} className="home-craft home-section">
+      <div className="home-craft__floral-background" aria-hidden="true">
+        {floralMotifs.map(([asset, index]) => <Image key={index} className={`home-craft__motif home-craft__motif--${index}`} src={`/img/home-craft-${asset}.png`} alt="" width={1254} height={1254} sizes="(max-width: 800px) 32vw, 22vw" />)}
+      </div>
       <div className="container home-craft__inner">
-        <div {...revealProps(copy)} className={`home-craft__copy ${copy.className}`}>
+        <div {...revealProps(copy)} className={`home-craft__copy home-title-host ${copy.className}`}>
           <p className="eyebrow">Notre savoir-faire</p>
-          <h2><span>Fait ici.</span><span>Mangé ici.</span></h2>
+          <h2><TitleLine>Fait ici.</TitleLine><TitleLine delay={90}>Mangé ici.</TitleLine></h2>
           <p className="home-craft__tagline">Pâtisser. Dresser. Partager.</p>
           <p>Des pâtisseries maison, des produits de qualité et beaucoup d’amour dans chaque assiette. Une cuisine sincère, gourmande et de saison, à déguster sur place ou à emporter.</p>
           <Link className="btn" href="/carte-menus">Découvrir la carte <span>↗</span></Link>
@@ -199,14 +236,59 @@ function HomeCraft() {
   );
 }
 
+function useCraftParallax() {
+  const ref = useRef(null);
+
+  useEffect(() => {
+    const node = ref.current;
+    if (!node || !("IntersectionObserver" in window)) return undefined;
+    const motionDisabled = window.matchMedia("(max-width: 800px), (prefers-reduced-motion: reduce)");
+    let frame = 0;
+    const update = () => {
+      frame = 0;
+      const rect = node.getBoundingClientRect();
+      const progress = motionDisabled.matches ? 0 : Math.max(-1, Math.min(1,
+        (window.innerHeight / 2 - rect.top - rect.height / 2) / ((window.innerHeight + rect.height) / 2)
+      ));
+      node.style.setProperty("--craft-parallax-main", `${(progress * 7.5).toFixed(2)}px`);
+      node.style.setProperty("--craft-parallax-detail", `${(progress * 10).toFixed(2)}px`);
+      node.style.setProperty("--craft-parallax-drink", `${(progress * 14).toFixed(2)}px`);
+    };
+    const schedule = () => {
+      if (!frame) frame = window.requestAnimationFrame(update);
+    };
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        window.addEventListener("scroll", schedule, { passive: true });
+        window.addEventListener("resize", schedule);
+        schedule();
+      } else {
+        window.removeEventListener("scroll", schedule);
+        window.removeEventListener("resize", schedule);
+      }
+    });
+    observer.observe(node);
+    motionDisabled.addEventListener("change", schedule);
+    return () => {
+      observer.disconnect();
+      motionDisabled.removeEventListener("change", schedule);
+      window.removeEventListener("scroll", schedule);
+      window.removeEventListener("resize", schedule);
+      if (frame) window.cancelAnimationFrame(frame);
+    };
+  }, []);
+
+  return ref;
+}
+
 function HomeDoor() {
   const reveal = useScrollReveal({ threshold: 0.12 });
   return (
-    <section {...revealProps(reveal)} className={`home-door home-section ${reveal.className}`}>
+    <section {...revealProps(reveal)} className={`home-door home-section home-title-host ${reveal.className}`}>
       <div className="home-door__image home-image-frame"><Image src="/img/home-door.jpg" alt="La cour ombragée du Jardin de Pauline" fill sizes="100vw" /></div>
       <div className="home-door__panel">
         <p className="eyebrow">Une cour pleine de charme</p>
-        <h2>Poussez la porte.</h2>
+        <h2><TitleLine>Poussez la porte.</TitleLine></h2>
         <p>Notre terrasse ombragée vous attend pour un moment hors du temps, en plein cœur de Montauban.</p>
         <Link className="btn" href="/reservation">Réserver une table <span>↗</span></Link>
       </div>
@@ -219,9 +301,9 @@ function HomeDrinks() {
   const collage = useScrollReveal({ delay: 120, threshold: 0.13 });
   return (
     <section className="home-drinks home-section container">
-      <div {...revealProps(copy)} className={`home-drinks__copy ${copy.className}`}>
+      <div {...revealProps(copy)} className={`home-drinks__copy home-title-host ${copy.className}`}>
         <p className="eyebrow">Nos boissons</p>
-        <h2><span>Une pause,</span><em>à boire aussi.</em></h2>
+        <h2><TitleLine>Une pause,</TitleLine><TitleLine as="em" delay={90}>à boire aussi.</TitleLine></h2>
         <p>Thés d’exception, créations maison, boissons fraîches et gourmandes… Il y en a pour tous les goûts et toutes les saisons.</p>
         <Link className="text-link" href="/boissons">Découvrir nos boissons <span>↗</span></Link>
       </div>
@@ -231,7 +313,6 @@ function HomeDrinks() {
         <div className="home-drinks__latte home-image-frame"><Image src="/img/home-drink-latte.jpg" alt="Latte glacé servi au salon" fill sizes="(max-width: 800px) 48vw, 19vw" /></div>
         <div className="home-drinks__coffee home-image-frame"><Image src="/img/home-drink-coffee.jpg" alt="Café versé sur une glace" fill sizes="(max-width: 800px) 48vw, 17vw" /></div>
       </div>
-      <Image className="home-flowers home-flowers--drinks" src="/img/home-flowers.png" alt="" aria-hidden="true" width={1326} height={1186} />
     </section>
   );
 }
@@ -239,14 +320,14 @@ function HomeDrinks() {
 function HomeFinal() {
   const reveal = useScrollReveal({ threshold: 0.16 });
   return (
-    <section {...revealProps(reveal)} className={`home-final home-section ${reveal.className}`}>
-      <Image className="home-leaf home-leaf--final" src="/img/home-leaf-1.png" alt="" aria-hidden="true" width={1090} height={1452} />
+    <section {...revealProps(reveal)} className={`home-final home-section home-title-host ${reveal.className}`}>
+      <Image className="home-final__divider" src="/img/home-section-divider.png" alt="" aria-hidden="true" width={2172} height={724} sizes="(max-width: 480px) 98vw, (max-width: 800px) 96vw, 92vw" />
       <p className="eyebrow">On vous garde une place ?</p>
-      <h2><span>Le bonheur est aussi</span><em>dans les petites pauses.</em></h2>
+      <h2><TitleLine>Le bonheur est aussi</TitleLine><TitleLine as="em" delay={90}>dans les petites pauses.</TitleLine></h2>
       <p>Un déjeuner à deux, un brunch entre amis, ou juste l’envie de prendre le temps.</p>
       <div className="home-final__actions">
         <Link className="btn" href="/reservation">Réserver une table <span>↗</span></Link>
-        <Link className="btn outline home-secondary-btn" href="/contact">Nous trouver <span>→</span></Link>
+        <Link className="btn home-secondary-btn" href="/contact">Nous trouver <span>→</span></Link>
       </div>
     </section>
   );

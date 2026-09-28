@@ -36,7 +36,7 @@ export default function ContactForm() {
   }
 
   if (isSubmitted) {
-    return <div className="garden-contact-success" role="status"><Check size={34} strokeWidth={1.3} /><p className="eyebrow">Merci pour votre message</p><h3>À très bientôt au jardin.</h3><p>Nous revenons vers vous dès que possible.</p><button type="button" className="btn outline" onClick={() => setIsSubmitted(false)}>Écrire un autre message</button></div>;
+    return <div className="garden-contact-success" role="status"><Check size={34} strokeWidth={1.3} /><p className="eyebrow">Merci pour votre message</p><h3>À très bientôt au jardin.</h3><p>Nous revenons vers vous dès que possible.</p><button type="button" className="btn" onClick={() => setIsSubmitted(false)}>Écrire un autre message</button></div>;
   }
 
   return <form className="garden-contact-form" onSubmit={handleSubmit(onSubmit)} noValidate>

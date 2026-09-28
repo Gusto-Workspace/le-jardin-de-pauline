@@ -4126,7 +4126,10 @@ body:has(.home-redesign) .footer-bottom {
     width: min(96vw, 1400px);
   }
   .home-final h2 {
-    font-size: clamp(2.9rem, 8.5vw, 4.2rem);
+    font-size: clamp(1.55rem, 8vw, 3.4rem);
+  }
+  .home-final h2 > .home-title-line {
+    white-space: nowrap;
   }
   body:has(.home-redesign) .footer {
     padding: 75px 0 30px;

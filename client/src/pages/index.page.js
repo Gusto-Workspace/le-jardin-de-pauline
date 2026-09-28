@@ -164,24 +164,33 @@ function useMomentsFanReveal() {
     };
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
-        if (!isOpen && scrollDirection > 0 && entry.intersectionRatio >= 0.08) {
+        if (!isOpen && scrollDirection > 0 && entry.intersectionRatio >= 0.9) {
           isOpen = true;
           setOpen(true);
         } else if (
           isOpen
           && scrollDirection < 0
-          && entry.intersectionRatio <= 0.02
+          && entry.intersectionRatio <= 0.5
           && entry.boundingClientRect.bottom > (entry.rootBounds?.bottom ?? window.innerHeight)
         ) {
           isOpen = false;
           setOpen(false);
         }
       });
-    }, { threshold: [0, 0.02, 0.08] });
-    observer.observe(node);
+    }, { threshold: [0, 0.5, 0.9] });
+    const observeResponsiveTarget = () => {
+      observer.disconnect();
+      const target = window.matchMedia("(max-width: 800px)").matches
+        ? node.children[0] || node
+        : node;
+      observer.observe(target);
+    };
+    observeResponsiveTarget();
+    window.addEventListener("resize", observeResponsiveTarget);
     window.addEventListener("scroll", updateScrollDirection, { passive: true });
     return () => {
       observer.disconnect();
+      window.removeEventListener("resize", observeResponsiveTarget);
       window.removeEventListener("scroll", updateScrollDirection);
     };
   }, []);
@@ -205,16 +214,24 @@ function useDrinksScrollAnimation() {
     ];
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     let frame = 0;
+    let currentProgress = 0;
+    let lastFrameTime = 0;
 
-    const update = () => {
+    const update = (timestamp = 0) => {
       frame = 0;
       const rect = collage.getBoundingClientRect();
       const viewportHeight = window.innerHeight;
       const start = viewportHeight;
       const finish = viewportHeight * 0.5 - rect.height * 0.5;
-      const progress = reducedMotion
+      const targetProgress = reducedMotion
         ? 1
         : Math.max(0, Math.min(1, (start - rect.top) / (start - finish)));
+      const elapsed = lastFrameTime ? Math.min(timestamp - lastFrameTime, 50) : 16;
+      lastFrameTime = timestamp;
+      const smoothing = 1 - Math.exp(-elapsed / 70);
+      currentProgress += (targetProgress - currentProgress) * smoothing;
+      if (Math.abs(targetProgress - currentProgress) < 0.001) currentProgress = targetProgress;
+      const progress = currentProgress * currentProgress * (3 - 2 * currentProgress);
 
       frames.forEach((element, index) => {
         const initial = scatter[index];
@@ -224,10 +241,17 @@ function useDrinksScrollAnimation() {
         const rotation = initial.to + (initial.from - initial.to) * remaining;
         element.style.setProperty("--drink-scroll-rotation", `${rotation}deg`);
       });
+
+      if (Math.abs(targetProgress - currentProgress) >= 0.001) {
+        frame = window.requestAnimationFrame(update);
+      }
     };
 
     const scheduleUpdate = () => {
-      if (!frame) frame = window.requestAnimationFrame(update);
+      if (!frame) {
+        lastFrameTime = 0;
+        frame = window.requestAnimationFrame(update);
+      }
     };
 
     update();

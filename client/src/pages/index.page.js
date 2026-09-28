@@ -134,7 +134,7 @@ function HomeMoments() {
         </div>
         <div ref={moments.ref} className={`home-moments__grid${moments.open ? " is-open" : ""}`}>
           <HomeMoment number="01" label="Déjeuner" title="Frais, simple, gourmand." image="/img/home-lunch.jpg" href="/carte-menus#dejeuner">Des produits frais, de saison, inspirés et faits maison, à savourer dans notre cour ou en salle.</HomeMoment>
-          <HomeMoment number="02" label="Le brunch du samedi" title="Le goût du week-end." image="/img/home-brunch.jpg" href="/carte-menus#menus">Chaque samedi, un brunch généreux et gourmand pour bien commencer le week-end.</HomeMoment>
+          <HomeMoment number="02" label="Le brunch" title="Le goût du brunch." image="/img/home-brunch.jpg" href="/carte-menus#menus">Un brunch généreux et gourmand, à savourer chaque jour.</HomeMoment>
           <HomeMoment number="03" label="L’heure du goûter" title="Encore un peu de douceur." image="/img/home-tea.jpg" href="/boissons">Thés d’exception, boissons maison et pâtisseries artisanales pour une pause tout en douceur.</HomeMoment>
         </div>
       </div>
@@ -164,20 +164,20 @@ function useMomentsFanReveal() {
     };
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
-        if (!isOpen && scrollDirection > 0 && entry.intersectionRatio >= 0.9) {
+        if (!isOpen && scrollDirection > 0 && entry.intersectionRatio >= 0.08) {
           isOpen = true;
           setOpen(true);
         } else if (
           isOpen
           && scrollDirection < 0
-          && entry.intersectionRatio <= 0.5
+          && entry.intersectionRatio <= 0.02
           && entry.boundingClientRect.bottom > (entry.rootBounds?.bottom ?? window.innerHeight)
         ) {
           isOpen = false;
           setOpen(false);
         }
       });
-    }, { threshold: [0, 0.5, 0.9] });
+    }, { threshold: [0, 0.02, 0.08] });
     observer.observe(node);
     window.addEventListener("scroll", updateScrollDirection, { passive: true });
     return () => {
@@ -187,6 +187,60 @@ function useMomentsFanReveal() {
   }, []);
 
   return { ref, open };
+}
+
+function useDrinksScrollAnimation() {
+  const ref = useRef(null);
+
+  useEffect(() => {
+    const collage = ref.current;
+    if (!collage) return undefined;
+
+    const frames = Array.from(collage.children);
+    const scatter = [
+      { x: -0.12, y: 0.42, from: -13, to: -1.5 },
+      { x: 0.1, y: -0.36, from: 11, to: 0 },
+      { x: 0.12, y: 0.34, from: 9, to: 0 },
+      { x: -0.1, y: -0.42, from: -15, to: 1 },
+    ];
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let frame = 0;
+
+    const update = () => {
+      frame = 0;
+      const rect = collage.getBoundingClientRect();
+      const viewportHeight = window.innerHeight;
+      const start = viewportHeight;
+      const finish = viewportHeight * 0.5 - rect.height * 0.5;
+      const progress = reducedMotion
+        ? 1
+        : Math.max(0, Math.min(1, (start - rect.top) / (start - finish)));
+
+      frames.forEach((element, index) => {
+        const initial = scatter[index];
+        const remaining = 1 - progress;
+        element.style.setProperty("--drink-scroll-x", `${initial.x * window.innerWidth * remaining}px`);
+        element.style.setProperty("--drink-scroll-y", `${initial.y * viewportHeight * remaining}px`);
+        const rotation = initial.to + (initial.from - initial.to) * remaining;
+        element.style.setProperty("--drink-scroll-rotation", `${rotation}deg`);
+      });
+    };
+
+    const scheduleUpdate = () => {
+      if (!frame) frame = window.requestAnimationFrame(update);
+    };
+
+    update();
+    window.addEventListener("scroll", scheduleUpdate, { passive: true });
+    window.addEventListener("resize", scheduleUpdate);
+    return () => {
+      window.removeEventListener("scroll", scheduleUpdate);
+      window.removeEventListener("resize", scheduleUpdate);
+      if (frame) window.cancelAnimationFrame(frame);
+    };
+  }, []);
+
+  return ref;
 }
 
 function HomeMoment({ number, label, title, image, href, children }) {
@@ -298,7 +352,7 @@ function HomeDoor() {
 
 function HomeDrinks() {
   const copy = useScrollReveal({ threshold: 0.13 });
-  const collage = useScrollReveal({ delay: 120, threshold: 0.13 });
+  const collage = useDrinksScrollAnimation();
   return (
     <section className="home-drinks home-section container">
       <div {...revealProps(copy)} className={`home-drinks__copy home-title-host ${copy.className}`}>
@@ -307,7 +361,7 @@ function HomeDrinks() {
         <p>Thés d’exception, créations maison, boissons fraîches et gourmandes… Il y en a pour tous les goûts et toutes les saisons.</p>
         <Link className="text-link" href="/boissons">Découvrir nos boissons <span>↗</span></Link>
       </div>
-      <div {...revealProps(collage)} className={`home-drinks__collage ${collage.className}`}>
+      <div ref={collage} className="home-drinks__collage">
         <div className="home-drinks__pink home-image-frame"><Image src="/img/home-drink-pink.jpg" alt="Boisson rose fraîche avec tranche de citron" fill sizes="(max-width: 800px) 62vw, 25vw" /></div>
         <div className="home-drinks__clear home-image-frame"><Image src="/img/home-drink-clear.jpg" alt="Boisson pétillante aux agrumes" fill sizes="(max-width: 800px) 45vw, 18vw" /></div>
         <div className="home-drinks__latte home-image-frame"><Image src="/img/home-drink-latte.jpg" alt="Latte glacé servi au salon" fill sizes="(max-width: 800px) 48vw, 19vw" /></div>

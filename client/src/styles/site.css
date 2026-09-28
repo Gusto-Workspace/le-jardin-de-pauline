@@ -3774,6 +3774,7 @@ body {
 }
 .home-drinks__collage {
   height: 450px;
+  overflow-x: clip;
 }
 .home-drinks__pink {
   width: 37%;
@@ -4078,6 +4079,9 @@ body:has(.home-redesign) .footer-bottom {
   .home-moments__grid.is-open .home-moment:nth-child(3) {
     transform: translate3d(0, 0, 0);
   }
+  .home-moments__grid.is-open .home-moment:nth-child(1) { transition-delay: 0ms; }
+  .home-moments__grid.is-open .home-moment:nth-child(2) { transition-delay: 120ms; }
+  .home-moments__grid.is-open .home-moment:nth-child(3) { transition-delay: 240ms; }
   .home-craft {
     padding-top: 95px;
     padding-bottom: 110px;
@@ -4183,9 +4187,11 @@ body:has(.home-redesign) .footer-bottom {
 }
 .home-hero__copy h1 > .home-title-line:last-child {
   line-height: 1.06;
-  padding-left: 10px;
   padding-bottom: 0.32em;
   margin-bottom: -0.32em;
+}
+.home-hero__copy h1 > .home-title-line:last-child > .home-title-line__inner {
+  padding-left: 10px;
 }
 .home-title-line__inner {
   display: block;
@@ -4394,33 +4400,12 @@ body:has(.home-redesign) .footer-bottom {
 .home-craft__collage.is-visible > .home-craft__drink { transition-delay: 0.4s; }
 .home-drinks__collage > .home-image-frame {
   opacity: 1;
-  translate: 0 0;
-  transition: opacity 0.72s ease, translate 0.82s cubic-bezier(0.22, 1, 0.36, 1);
+  translate: none;
+  transform: translate3d(var(--drink-scroll-x, 0px), var(--drink-scroll-y, 0px), 0)
+    rotate(var(--drink-scroll-rotation, 0deg));
+  transition: none;
+  will-change: transform;
 }
-.home-drinks__collage.is-hidden > .home-drinks__pink {
-  opacity: 0;
-  translate: 0 22px;
-}
-.home-drinks__collage.is-hidden > .home-drinks__clear {
-  opacity: 0;
-  translate: 0 -18px;
-}
-.home-drinks__collage.is-hidden > .home-drinks__latte {
-  opacity: 0;
-  translate: 0 22px;
-}
-.home-drinks__collage.is-hidden > .home-drinks__coffee {
-  opacity: 0;
-  translate: 0 -18px;
-}
-.home-drinks__collage.is-visible > .home-image-frame {
-  opacity: 1;
-  translate: 0 0;
-}
-.home-drinks__collage.is-visible > .home-drinks__pink { transition-delay: 0.04s; }
-.home-drinks__collage.is-visible > .home-drinks__clear { transition-delay: 0.18s; }
-.home-drinks__collage.is-visible > .home-drinks__latte { transition-delay: 0.32s; }
-.home-drinks__collage.is-visible > .home-drinks__coffee { transition-delay: 0.46s; }
 
 .home-door { background: var(--paper); }
 .home-door__panel { background: var(--green); }
@@ -4439,35 +4424,6 @@ body:has(.home-redesign) .footer-bottom {
 .home-door .home-door__panel > h2 { transition-delay: 0.25s; }
 .home-door .home-door__panel > p:not(.eyebrow) { transition-delay: 0.33s; }
 .home-door .home-door__panel > .btn { transition-delay: 0.41s; }
-
-.home-drinks__collage.is-visible .home-drinks__pink {
-  animation: home-drink-pink-float 8.4s ease-in-out 1s infinite alternate;
-}
-.home-drinks__collage.is-visible .home-drinks__clear {
-  animation: home-drink-clear-float 10.2s ease-in-out 1.15s infinite alternate;
-}
-.home-drinks__collage.is-visible .home-drinks__latte {
-  animation: home-drink-latte-float 9.3s ease-in-out 1.3s infinite alternate;
-}
-.home-drinks__collage.is-visible .home-drinks__coffee {
-  animation: home-drink-coffee-float 11.1s ease-in-out 1.05s infinite alternate;
-}
-@keyframes home-drink-pink-float {
-  from { transform: translate3d(0, 0, 0) rotate(-1.5deg); }
-  to { transform: translate3d(0, -4px, 0) rotate(-0.5deg); }
-}
-@keyframes home-drink-clear-float {
-  from { transform: translate3d(0, 0, 0) rotate(0deg); }
-  to { transform: translate3d(0, -5px, 0) rotate(-0.5deg); }
-}
-@keyframes home-drink-latte-float {
-  from { transform: translate3d(0, 0, 0) rotate(0deg); }
-  to { transform: translate3d(0, -3px, 0) rotate(0.8deg); }
-}
-@keyframes home-drink-coffee-float {
-  from { transform: translate3d(0, 0, 0) rotate(1deg); }
-  to { transform: translate3d(0, -4px, 0) rotate(-0.2deg); }
-}
 
 @media (max-width: 1100px) {
   .home-story:not(.is-placed) .home-story__main { transform: translate3d(-24px, 0, 0) rotate(-2deg); }
@@ -4507,7 +4463,6 @@ body:has(.home-redesign) .footer-bottom {
   .home-redesign .home-hero__visual.reveal.is-visible .home-hero__detail {
     animation: home-hero-photo-in 0.75s cubic-bezier(0.22, 1, 0.36, 1) 0.2s both;
   }
-  .home-drinks__collage.is-visible > .home-image-frame { animation: none; }
   .home-door__image,
   .home-door__panel { transition-duration: 0.8s; }
 }
@@ -4536,5 +4491,4 @@ body:has(.home-redesign) .footer-bottom {
   .home-craft__detail { transform: rotate(1.5deg) !important; }
   .home-door__image,
   .home-door__panel { clip-path: inset(0) !important; transition: none !important; }
-  .home-drinks__collage.is-visible > .home-image-frame { animation: none !important; }
 }

@@ -1,10 +1,10 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { useContext, useEffect, useMemo, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Instagram as InstagramIcon, Menu, X } from "lucide-react";
 import { GlobalContext } from "@/contexts/global.context";
-import { getAddress, getHours, getSocialUrl, groupHours } from "@/utils/restaurant";
+import { getAddress, getSocialUrl } from "@/utils/restaurant";
 
 const links = [
   ["Accueil", "/"],
@@ -76,15 +76,13 @@ export function Footer() {
   const { restaurantContext } = useContext(GlobalContext);
   const restaurant = restaurantContext?.restaurantData;
   const address = getAddress(restaurant);
-  const hours = useMemo(() => groupHours(getHours(restaurant)), [restaurant]);
   const instagram = getSocialUrl(restaurant, "instagram");
 
   return (
     <footer className="footer">
       <div className="container footer-grid">
-        <div><Link href="/"><Brand /></Link><p>Une pause gourmande,<br />au cœur de Montauban.</p>{instagram ? <a className="instagram-link" href={instagram} target="_blank" rel="noreferrer"><InstagramIcon size={17} strokeWidth={1.5} aria-hidden="true" /><span>Instagram</span></a> : null}</div>
-        <div><h3>Poussez la porte</h3><address>{address.length ? address.map((line) => <span key={line}>{line}<br /></span>) : <span>Adresse momentanément indisponible</span>}</address>{restaurant?.phone ? <a href={`tel:${restaurant.phone.replace(/[^\d+]/g, "")}`}>{restaurant.phone}</a> : null}<Link href="/contact">Contact & itinéraire</Link></div>
-        <div><h3>Les heures du jardin</h3>{restaurantContext?.dataLoading ? <p>Chargement des horaires…</p> : hours.map((group) => <p className="hours" key={`${group.labels.join("-")}-${group.value}`}><span>{group.labels.length > 1 ? `${group.labels[0]} — ${group.labels.at(-1)}` : group.labels[0]}</span><strong>{group.value.split(" · ").map((slot) => <span key={slot}>{slot}</span>)}</strong></p>)}</div>
+        <div className="footer-brand"><Link href="/" aria-label="Le Jardin de Pauline, accueil"><Image className="footer-logo" src="/logo-couleur.jpg" alt="Le Jardin de Pauline — Salon de thé & Co" width={1200} height={800} /></Link><p>Une pause gourmande,<br />au cœur de Montauban.</p></div>
+        <div className="footer-contact"><h3>Poussez la porte</h3><address>{address.length ? address.map((line) => <span key={line}>{line}<br /></span>) : <span>Adresse momentanément indisponible</span>}</address>{restaurant?.phone ? <a href={`tel:${restaurant.phone.replace(/[^\d+]/g, "")}`}>{restaurant.phone}</a> : null}{instagram ? <a className="instagram-link" href={instagram} target="_blank" rel="noreferrer" aria-label="Instagram"><InstagramIcon size={19} strokeWidth={1.5} aria-hidden="true" /></a> : null}</div>
       </div>
       <div className="container footer-bottom"><span>© {new Date().getFullYear()} Le Jardin de Pauline · Montauban</span><span>Photographies © Le Jardin de Pauline · Montauban Tourisme</span></div>
     </footer>

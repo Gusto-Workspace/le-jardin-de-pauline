@@ -263,10 +263,15 @@ function BrunchFeature({ menu, section }) {
           <Image src="/img/home/brunch.webp" alt="Brunch gourmand servi au Jardin de Pauline" width={2400} height={3600} sizes="(max-width: 800px) 78vw, 34vw" />
         </div>
         <div className="carte-brunch__formula">
-          <p className="carte-brunch__description">{menu?.description || "Il ne se prend pas au sérieux, mais il cartonne."}</p>
+          <p className="carte-brunch__description">
+            {String(menu?.description || "Il ne se prend pas au sérieux, mais il cartonne.")
+              .split(/\r?\n/)
+              .map((line) => line.trim())
+              .filter(Boolean)
+              .map((line, index) => <span className="carte-brunch__description-line" key={index}>{line}</span>)}
+          </p>
           <MenuGroups menu={menu} section={section} numbered />
           {menu && getMenuGroups(menu).length && section ? <div className="carte-brunch__extra-dishes"><DishList section={section} /></div> : null}
-          <p className="carte-brunch__note">Les plats du brunch sont proposés uniquement dans la formule.</p>
         </div>
       </div>
     </Reveal>

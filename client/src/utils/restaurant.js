@@ -97,12 +97,14 @@ export function getDrinkSections(restaurant) {
     .map((category, index) => ({
       id: category?._id || `drink-${index}`,
       name: category?.name || "Boissons",
+      description: category?.description || "",
       items: (category?.drinks || []).filter((item) => item?.showOnWebsite).map(mapItem),
       subCategories: (category?.subCategories || [])
         .filter((sub) => sub?.visible !== false)
         .map((sub, subIndex) => ({
           id: sub?._id || `drink-sub-${subIndex}`,
           name: sub?.name || "",
+          description: sub?.description || "",
           items: (sub?.drinks || []).filter((item) => item?.showOnWebsite).map(mapItem),
         }))
         .filter((sub) => sub.items.length),

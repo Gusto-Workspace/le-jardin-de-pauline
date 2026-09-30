@@ -90,6 +90,7 @@ function DrinkItems({ section, wines = false }) {
     {section.items.map((item) => <DrinkItem key={item.id} item={item} wines={wines} />)}
     {section.subCategories.map((sub) => <div className="carte-dishes__sub boissons-sub-category" key={sub.id}>
       <h3>{sub.name}</h3>
+      {sub.description ? <p className="carte-category__tagline">{sub.description}</p> : null}
       {sub.items.map((item) => <DrinkItem key={item.id} item={item} wines={wines} />)}
     </div>)}
   </div>;

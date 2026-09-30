@@ -4583,7 +4583,9 @@ body:has(.home-redesign) .footer-bottom {
   line-height: 1.5;
 }
 .carte-dish__subtitle {
+  margin-top: 1px !important;
   font-size: 0.8rem !important;
+  font-style: italic;
 }
 .carte-dish > strong {
   color: var(--ink);
@@ -4663,7 +4665,9 @@ body:has(.home-redesign) .footer-bottom {
   font-size: 0.75rem;
 }
 .carte-menu-dish__subtitle {
+  margin-top: 1px !important;
   font-size: 0.7rem !important;
+  font-style: italic;
 }
 .carte-brunch {
   position: relative;

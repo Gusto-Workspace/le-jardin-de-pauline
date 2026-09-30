@@ -14,7 +14,7 @@ const links = [
 ];
 
 function Brand({ logo = false }) {
-  if (logo) return <Image className="brand-logo" src="/logo-transaprent.png" alt="Le Jardin de Pauline" width={1536} height={1024} priority />;
+  if (logo) return <Image className="brand-logo" src="/logo-transaprent.webp" alt="Le Jardin de Pauline" width={1536} height={1024} priority />;
   return (
     <span className="brand">
       <small>Le Jardin de</small>
@@ -81,7 +81,7 @@ export function Footer() {
   return (
     <footer className="footer">
       <div className="container footer-grid">
-        <div className="footer-brand"><Link href="/" aria-label="Le Jardin de Pauline, accueil"><Image className="footer-logo" src="/logo-couleur.jpg" alt="Le Jardin de Pauline — Salon de thé & Co" width={1200} height={800} /></Link><p>Une pause gourmande,<br />au cœur de Montauban.</p></div>
+        <div className="footer-brand"><Link href="/" aria-label="Le Jardin de Pauline, accueil"><Image className="footer-logo" src="/logo-couleur.webp" alt="Le Jardin de Pauline — Salon de thé & Co" width={1200} height={800} /></Link><p>Une pause gourmande,<br />au cœur de Montauban.</p></div>
         <div className="footer-contact"><h3>Poussez la porte</h3><address>{address.length ? address.map((line) => <span key={line}>{line}<br /></span>) : <span>Adresse momentanément indisponible</span>}</address>{restaurant?.phone ? <a href={`tel:${restaurant.phone.replace(/[^\d+]/g, "")}`}>{restaurant.phone}</a> : null}{instagram ? <a className="instagram-link" href={instagram} target="_blank" rel="noreferrer" aria-label="Instagram"><InstagramIcon size={19} strokeWidth={1.5} aria-hidden="true" /></a> : null}</div>
       </div>
       <div className="container footer-bottom"><span>© {new Date().getFullYear()} Le Jardin de Pauline · Montauban</span><span>Photographies © Le Jardin de Pauline · Montauban Tourisme</span></div>

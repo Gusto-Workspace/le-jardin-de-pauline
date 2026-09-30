@@ -87,7 +87,7 @@ export default function MenusPage() {
         <div className="carte-page">
           <section className="carte-hero">
             <div className="carte-hero__plate" aria-hidden="true">
-              <Image src="/img/carte-hero-plate.png" alt="" fill sizes="(max-width: 800px) 54vw, 380px" />
+              <Image src="/img/carte-menus/hero-plate.webp" alt="" fill sizes="(max-width: 800px) 54vw, 380px" />
             </div>
             <div className="carte-hero__inner home-hero__inner container">
               <div ref={heroCopyReveal.ref} style={heroCopyReveal.style} className={`carte-hero__copy home-hero__copy home-title-host ${heroCopyReveal.className}`}>
@@ -102,13 +102,13 @@ export default function MenusPage() {
               </div>
               <div ref={heroVisualReveal.ref} style={heroVisualReveal.style} className={`carte-hero__visual home-hero__visual carte-hero__visual--animated carte-hero__visual--carte ${heroVisualReveal.className}`} role="img" aria-label="Collage de pâtisseries et de douceurs maison">
                 <div className="carte-hero__photo carte-hero__photo--bao" aria-hidden="true">
-                  <Image src="/img/carte-hero-bao.jpg" alt="" fill sizes="(max-width: 800px) 42vw, 240px" />
+                  <Image src="/img/carte-menus/hero-bao.webp" alt="" fill sizes="(max-width: 800px) 42vw, 240px" />
                 </div>
                 <div className="carte-hero__photo carte-hero__photo--pastries" aria-hidden="true">
-                  <Image src="/img/carte-hero-pastries.jpg" alt="" fill priority sizes="(max-width: 800px) 48vw, 290px" />
+                  <Image src="/img/carte-menus/hero-pastries.webp" alt="" fill priority sizes="(max-width: 800px) 48vw, 290px" />
                 </div>
                 <div className="carte-hero__photo carte-hero__photo--tart" aria-hidden="true">
-                  <Image src="/img/carte-hero-tart.jpg" alt="" fill sizes="(max-width: 800px) 42vw, 250px" />
+                  <Image src="/img/carte-menus/hero-tart.webp" alt="" fill sizes="(max-width: 800px) 42vw, 250px" />
                 </div>
               </div>
             </div>
@@ -131,7 +131,7 @@ export default function MenusPage() {
 
               {otherMenus.length ? <>
                 <Reveal as="section" className="carte-quote-band" aria-label="L’esprit du Jardin de Pauline" threshold={0.08}>
-                  <Image className="carte-quote-band__leaves" src="/img/home-craft-branch-b.png" alt="" aria-hidden="true" width={1254} height={1254} sizes="(max-width: 800px) 220px, 370px" />
+                  <Image className="carte-quote-band__leaves" src="/img/home/craft-branch-b.webp" alt="" aria-hidden="true" width={1254} height={1254} sizes="(max-width: 800px) 220px, 370px" />
                   <div className="carte-quote-band__inner container">
                     <blockquote>
                       <span className="carte-quote-band__mark carte-quote-band__mark--open" aria-hidden="true">“</span>
@@ -144,7 +144,7 @@ export default function MenusPage() {
                   <div className="carte-menus-heading">
                     <div className="carte-menus-heading__ornament" aria-hidden="true">
                       <span />
-                      <Image src="/img/home-band-branch.png" alt="" width={1254} height={1254} />
+                      <Image src="/img/home/band-branch.webp" alt="" width={1254} height={1254} />
                       <span />
                     </div>
                     <h2>Nos menus</h2>
@@ -258,7 +258,7 @@ function BrunchFeature({ menu, section }) {
           {menu?.description ? <p className="carte-brunch__description">{menu.description}</p> : <p className="carte-brunch__description">Il ne se prend pas au sérieux, mais il cartonne.</p>}
         </div>
         <div className="carte-brunch__photo">
-          <Image src="/img/home-brunch.jpg" alt="Brunch gourmand servi au Jardin de Pauline" width={2400} height={3600} sizes="(max-width: 800px) 78vw, 34vw" />
+          <Image src="/img/home/brunch.webp" alt="Brunch gourmand servi au Jardin de Pauline" width={2400} height={3600} sizes="(max-width: 800px) 78vw, 34vw" />
         </div>
         <div className="carte-brunch__formula">
           <MenuGroups menu={menu} section={section} numbered />
@@ -275,7 +275,7 @@ function MiniBossFeature({ menu, section }) {
     <Reveal as="section" className="carte-mini-boss" threshold={0.08}>
       <div className="carte-mini-boss__inner container">
         <div className="carte-mini-boss__photo">
-          <Image src="/img/home-lunch.jpg" alt="Assiette gourmande préparée au Jardin de Pauline" width={2400} height={3600} sizes="(max-width: 800px) 78vw, 26vw" />
+          <Image src="/img/home/lunch.webp" alt="Assiette gourmande préparée au Jardin de Pauline" width={2400} height={3600} sizes="(max-width: 800px) 78vw, 26vw" />
         </div>
         <div className="carte-mini-boss__intro">
           <p className="eyebrow">Pour les petits gourmands</p>

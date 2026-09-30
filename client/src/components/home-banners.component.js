@@ -9,7 +9,7 @@ function HomeTitleLine({ as: Element = "span", delay = 0, children }) {
 export function HomeBand() {
   return (
     <div className="home-band" aria-label="Les rendez-vous du Jardin de Pauline">
-      <Image className="home-band__branch" src="/img/home-band-branch.png" alt="" aria-hidden="true" width={1254} height={1254} sizes="58px" />
+      <Image className="home-band__branch" src="/img/home/band-branch.webp" alt="" aria-hidden="true" width={1254} height={1254} sizes="58px" />
       <div className="home-band__track">
         <div className="home-band__ticker">
           <div className="home-band__items">
@@ -20,16 +20,16 @@ export function HomeBand() {
           </div>
         </div>
       </div>
-      <Image className="home-band__branch home-band__branch--right" src="/img/home-band-branch.png" alt="" aria-hidden="true" width={1254} height={1254} sizes="58px" />
+      <Image className="home-band__branch home-band__branch--right" src="/img/home/band-branch.webp" alt="" aria-hidden="true" width={1254} height={1254} sizes="58px" />
     </div>
   );
 }
 
-export function HomeDoor() {
+export function HomeDoor({ className = "" }) {
   const reveal = useScrollReveal({ threshold: 0.12 });
   return (
-    <section ref={reveal.ref} style={reveal.style} className={`home-door home-section home-title-host ${reveal.className}`}>
-      <div className="home-door__image home-image-frame"><Image src="/img/home-door.jpg" alt="La cour ombragée du Jardin de Pauline" fill sizes="100vw" /></div>
+    <section ref={reveal.ref} style={reveal.style} className={`home-door home-section home-title-host ${className} ${reveal.className}`.trim()}>
+      <div className="home-door__image home-image-frame"><Image src="/img/home/door.webp" alt="La cour ombragée du Jardin de Pauline" fill sizes="100vw" /></div>
       <div className="home-door__panel">
         <p className="eyebrow">Une cour pleine de charme</p>
         <h2><HomeTitleLine>Poussez la porte.</HomeTitleLine></h2>

@@ -41,6 +41,7 @@ function HomeHero() {
 
   return (
     <section className="home-hero home-section">
+      <Image className="home-hero__botanical" src="/img/home/hero-flower-branch.webp" alt="" aria-hidden="true" width={1254} height={1254} sizes="(max-width: 800px) 64vw, 42vw" />
       <div className="home-hero__inner container">
         <div {...revealProps(copy)} className={`home-hero__copy home-title-host ${copy.className}`}>
           <p className="eyebrow">Le Jardin de Pauline · Montauban</p>
@@ -53,10 +54,10 @@ function HomeHero() {
         </div>
         <div {...revealProps(visual)} className={`home-hero__visual ${visual.className}`}>
           <div className="home-hero__main-image home-image-frame">
-            <Image src="/img/home-hero.jpg" alt="L'entrée fleurie du Jardin de Pauline sous une arche de briques" fill priority sizes="(max-width: 800px) 100vw, 58vw" />
+            <Image src="/img/home/hero.webp" alt="L'entrée fleurie du Jardin de Pauline sous une arche de briques" fill priority sizes="(max-width: 800px) 100vw, 58vw" />
           </div>
           <div className="home-hero__detail home-image-frame">
-            <Image src="/img/home-hero-detail.jpg" alt="Une assiette gourmande servie au Jardin de Pauline" fill sizes="(max-width: 800px) 48vw, 19vw" />
+            <Image src="/img/home/hero-detail.webp" alt="Une assiette gourmande servie au Jardin de Pauline" fill sizes="(max-width: 800px) 48vw, 19vw" />
           </div>
         </div>
       </div>
@@ -71,9 +72,9 @@ function HomeStory() {
   return (
     <section ref={story.ref} className={`home-story home-section container${story.placed ? " is-placed" : ""}`}>
       <div className="home-story__collage">
-        <div className="home-story__main home-image-frame"><Image src="/img/home-story.jpg" alt="La cour fleurie et les tables du Jardin de Pauline" fill sizes="(max-width: 800px) 100vw, 47vw" /></div>
-        <div className="home-story__interior home-image-frame"><Image src="/img/home-story-interior.jpg" alt="Le décor intérieur chaleureux du salon de thé" fill sizes="(max-width: 800px) 58vw, 23vw" /></div>
-        <div className="home-story__tea home-image-frame"><Image src="/img/home-story-tea.jpg" alt="Théières fleuries et vaisselle délicate" fill sizes="(max-width: 800px) 52vw, 18vw" /></div>
+        <div className="home-story__main home-image-frame"><Image src="/img/home/story.webp" alt="La cour fleurie et les tables du Jardin de Pauline" fill sizes="(max-width: 800px) 100vw, 47vw" /></div>
+        <div className="home-story__interior home-image-frame"><Image src="/img/home/story-interior.webp" alt="Le décor intérieur chaleureux du salon de thé" fill sizes="(max-width: 800px) 58vw, 23vw" /></div>
+        <div className="home-story__tea home-image-frame"><Image src="/img/home/story-tea.webp" alt="Théières fleuries et vaisselle délicate" fill sizes="(max-width: 800px) 52vw, 18vw" /></div>
       </div>
       <div {...revealProps(copy)} className={`home-story__copy home-title-host ${copy.className}`}>
         <p className="eyebrow">Une adresse un peu cachée</p>
@@ -82,7 +83,7 @@ function HomeStory() {
         <p>Une assiette salée, une pâtisserie maison, un thé servi dans une jolie tasse… Ici, la gourmandise accompagne chaque moment de la journée.</p>
         <Link className="text-link" href="/contact">Trouver le jardin <span>→</span></Link>
       </div>
-      <Image className="home-story__botanical" src="/img/home-botanical-branch.png" alt="" aria-hidden="true" width={1024} height={1536} sizes="(max-width: 800px) 60vw, 45vw" />
+      <Image className="home-story__botanical" src="/img/home/botanical-branch.webp" alt="" aria-hidden="true" width={1024} height={1536} sizes="(max-width: 800px) 60vw, 45vw" />
     </section>
   );
 }
@@ -114,7 +115,7 @@ function HomeMoments() {
   const moments = useMomentsFanReveal();
   return (
     <section className="home-moments home-section">
-      <Image className="home-moments__flower" src="/img/home-moments-flower.png" alt="" aria-hidden="true" width={1254} height={1254} />
+      <Image className="home-moments__flower" src="/img/home/moments-flower.webp" alt="" aria-hidden="true" width={1254} height={1254} />
       <div className="container">
         <div {...revealProps(heading)} className={`home-moments__heading home-title-host ${heading.className}`}>
           <p className="eyebrow">Nos temps gourmands</p>
@@ -122,9 +123,9 @@ function HomeMoments() {
           <p className="home-moments__intro">Trois façons de se régaler au jardin, au fil de la journée.</p>
         </div>
         <div ref={moments.ref} className={`home-moments__grid${moments.open ? " is-open" : ""}`}>
-          <HomeMoment number="01" label="Déjeuner" title="Frais, simple, gourmand." image="/img/home-lunch.jpg" href="/carte-menus#dejeuner">Des produits frais, de saison, inspirés et faits maison, à savourer dans notre cour ou en salle.</HomeMoment>
-          <HomeMoment number="02" label="Le brunch" title="Le goût du brunch." image="/img/home-brunch.jpg" href="/carte-menus#menus">Un brunch généreux et gourmand, à savourer chaque jour.</HomeMoment>
-          <HomeMoment number="03" label="L’heure du goûter" title="Encore un peu de douceur." image="/img/home-tea.jpg" href="/boissons">Thés d’exception, boissons maison et pâtisseries artisanales pour une pause tout en douceur.</HomeMoment>
+          <HomeMoment number="01" label="Déjeuner" title="Frais, simple, gourmand." image="/img/home/lunch.webp" href="/carte-menus#dejeuner">Des produits frais, de saison, inspirés et faits maison, à savourer dans notre cour ou en salle.</HomeMoment>
+          <HomeMoment number="02" label="Le brunch" title="Le goût du brunch." image="/img/home/brunch.webp" href="/carte-menus#menus">Un brunch généreux et gourmand, à savourer chaque jour.</HomeMoment>
+          <HomeMoment number="03" label="L’heure du goûter" title="Encore un peu de douceur." image="/img/home/tea.webp" href="/boissons">Thés d’exception, boissons maison et pâtisseries artisanales pour une pause tout en douceur.</HomeMoment>
         </div>
       </div>
     </section>
@@ -283,7 +284,7 @@ function HomeCraft() {
   return (
     <section ref={parallaxRef} className="home-craft home-section">
       <div className="home-craft__floral-background" aria-hidden="true">
-        {floralMotifs.map(([asset, index]) => <Image key={index} className={`home-craft__motif home-craft__motif--${index}`} src={`/img/home-craft-${asset}.png`} alt="" width={1254} height={1254} sizes="(max-width: 800px) 32vw, 22vw" />)}
+        {floralMotifs.map(([asset, index]) => <Image key={index} className={`home-craft__motif home-craft__motif--${index}`} src={`/img/home/craft-${asset}.webp`} alt="" width={1254} height={1254} sizes="(max-width: 800px) 32vw, 22vw" />)}
       </div>
       <div className="container home-craft__inner">
         <div {...revealProps(copy)} className={`home-craft__copy home-title-host ${copy.className}`}>
@@ -294,9 +295,9 @@ function HomeCraft() {
           <Link className="btn" href="/carte-menus">Découvrir la carte <span>↗</span></Link>
         </div>
         <div {...revealProps(collage)} className={`home-craft__collage ${collage.className}`}>
-          <div className="home-craft__main home-image-frame"><Image src="/img/home-craft-main.jpg" alt="Dessert maison aux agrumes et romarin" fill sizes="(max-width: 800px) 78vw, 32vw" /></div>
-          <div className="home-craft__detail home-image-frame"><Image src="/img/home-craft-detail.jpg" alt="Petites tartelettes au chocolat et fleurs séchées" fill sizes="(max-width: 800px) 48vw, 20vw" /></div>
-          <div className="home-craft__drink home-image-frame"><Image src="/img/home-craft-drink.jpg" alt="Boisson rose maison avec fleurs fraîches" fill sizes="(max-width: 800px) 53vw, 21vw" /></div>
+          <div className="home-craft__main home-image-frame"><Image src="/img/home/craft-main.webp" alt="Dessert maison aux agrumes et romarin" fill sizes="(max-width: 800px) 78vw, 32vw" /></div>
+          <div className="home-craft__detail home-image-frame"><Image src="/img/home/craft-detail.webp" alt="Petites tartelettes au chocolat et fleurs séchées" fill sizes="(max-width: 800px) 48vw, 20vw" /></div>
+          <div className="home-craft__drink home-image-frame"><Image src="/img/home/craft-drink.webp" alt="Boisson rose maison avec fleurs fraîches" fill sizes="(max-width: 800px) 53vw, 21vw" /></div>
         </div>
       </div>
     </section>
@@ -360,10 +361,10 @@ function HomeDrinks() {
         <Link className="text-link" href="/boissons">Découvrir nos boissons <span>↗</span></Link>
       </div>
       <div ref={collage} className="home-drinks__collage">
-        <div className="home-drinks__pink home-image-frame"><Image src="/img/home-drink-pink.jpg" alt="Boisson rose fraîche avec tranche de citron" fill sizes="(max-width: 800px) 62vw, 25vw" /></div>
-        <div className="home-drinks__clear home-image-frame"><Image src="/img/home-drink-clear.jpg" alt="Boisson pétillante aux agrumes" fill sizes="(max-width: 800px) 45vw, 18vw" /></div>
-        <div className="home-drinks__latte home-image-frame"><Image src="/img/home-drink-latte.jpg" alt="Latte glacé servi au salon" fill sizes="(max-width: 800px) 48vw, 19vw" /></div>
-        <div className="home-drinks__coffee home-image-frame"><Image src="/img/home-drink-coffee.jpg" alt="Café versé sur une glace" fill sizes="(max-width: 800px) 48vw, 17vw" /></div>
+        <div className="home-drinks__pink home-image-frame"><Image src="/img/home/drink-pink.webp" alt="Boisson rose fraîche avec tranche de citron" fill sizes="(max-width: 800px) 62vw, 25vw" /></div>
+        <div className="home-drinks__clear home-image-frame"><Image src="/img/home/drink-clear.webp" alt="Boisson pétillante aux agrumes" fill sizes="(max-width: 800px) 45vw, 18vw" /></div>
+        <div className="home-drinks__latte home-image-frame"><Image src="/img/home/drink-latte.webp" alt="Latte glacé servi au salon" fill sizes="(max-width: 800px) 48vw, 19vw" /></div>
+        <div className="home-drinks__coffee home-image-frame"><Image src="/img/home/drink-coffee.webp" alt="Café versé sur une glace" fill sizes="(max-width: 800px) 48vw, 17vw" /></div>
       </div>
     </section>
   );
@@ -373,7 +374,7 @@ function HomeFinal() {
   const reveal = useScrollReveal({ threshold: 0.16 });
   return (
     <section {...revealProps(reveal)} className={`home-final home-section home-title-host ${reveal.className}`}>
-      <Image className="home-final__divider" src="/img/home-section-divider.png" alt="" aria-hidden="true" width={2172} height={724} sizes="(max-width: 480px) 98vw, (max-width: 800px) 96vw, 92vw" />
+      <Image className="home-final__divider" src="/img/home/section-divider.webp" alt="" aria-hidden="true" width={2172} height={724} sizes="(max-width: 480px) 98vw, (max-width: 800px) 96vw, 92vw" />
       <p className="eyebrow">On vous garde une place ?</p>
       <h2><TitleLine>Le bonheur est aussi</TitleLine><TitleLine as="em" delay={90}>dans les petites pauses.</TitleLine></h2>
       <p>Un déjeuner à deux, un brunch entre amis, ou juste l’envie de prendre le temps.</p>

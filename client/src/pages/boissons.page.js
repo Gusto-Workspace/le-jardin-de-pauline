@@ -17,7 +17,7 @@ export default function DrinksPage() {
   return <><Head><title>Les boissons · Le Jardin de Pauline</title><meta name="description" content="Thés, cafés, boissons fraîches et vins au Jardin de Pauline." /></Head><SiteShell>
     <section className="carte-hero boissons-hero">
       <div className="carte-hero__plate" aria-hidden="true">
-        <Image src="/img/boissons-hero-verre.png" alt="" fill sizes="(max-width: 800px) 54vw, 380px" />
+        <Image src="/img/boissons/hero-verre.webp" alt="" fill sizes="(max-width: 800px) 54vw, 380px" />
       </div>
       <div className="carte-hero__inner home-hero__inner container">
         <div ref={heroCopyReveal.ref} style={heroCopyReveal.style} className={`carte-hero__copy home-hero__copy home-title-host ${heroCopyReveal.className}`}>
@@ -32,13 +32,13 @@ export default function DrinksPage() {
         </div>
         <div ref={heroVisualReveal.ref} style={heroVisualReveal.style} className={`carte-hero__visual home-hero__visual carte-hero__visual--animated boissons-hero__visual ${heroVisualReveal.className}`} role="img" aria-label="Collage de boissons fraîches et gourmandes">
           <div className="carte-hero__photo carte-hero__photo--bao" aria-hidden="true">
-            <Image src="/img/boissons-hero-4191.jpg" alt="" fill sizes="(max-width: 800px) 42vw, 240px" />
+            <Image src="/img/boissons/hero-4191.webp" alt="" fill sizes="(max-width: 800px) 42vw, 240px" />
           </div>
           <div className="carte-hero__photo carte-hero__photo--pastries" aria-hidden="true">
-            <Image src="/img/boissons-hero-5182.jpg" alt="" fill priority sizes="(max-width: 800px) 48vw, 290px" />
+            <Image src="/img/boissons/hero-5182.webp" alt="" fill priority sizes="(max-width: 800px) 48vw, 290px" />
           </div>
           <div className="carte-hero__photo carte-hero__photo--tart" aria-hidden="true">
-            <Image src="/img/boissons-hero-3897.jpg" alt="" fill sizes="(max-width: 800px) 42vw, 250px" />
+            <Image src="/img/boissons/hero-3897.webp" alt="" fill sizes="(max-width: 800px) 42vw, 250px" />
           </div>
         </div>
       </div>

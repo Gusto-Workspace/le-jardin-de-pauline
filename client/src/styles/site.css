@@ -1474,7 +1474,7 @@ p {
   padding: 70px 24px;
   background:
     linear-gradient(#faf8f2e8, #faf8f2e8),
-    url("/img/cour.jpg") center/cover;
+    url("/img/home/hero.webp") center/cover;
 }
 .flow-panel {
   max-width: 670px;
@@ -3208,6 +3208,73 @@ body {
 }
 .contact-details .full > p:last-child {
   text-wrap: pretty;
+}
+.home-door--contact {
+  background: var(--paper);
+}
+.home-door--contact .home-door__panel {
+  background: rgb(202 176 156 / 0.23);
+  color: var(--green);
+}
+.home-door--contact .home-door__panel .eyebrow,
+.home-door--contact .home-door__panel h2,
+.home-door--contact .home-door__panel > p:not(.eyebrow) {
+  color: var(--green);
+}
+.home-door--contact .home-door__panel .btn {
+  border-color: var(--green);
+  color: var(--green);
+}
+.contact-page-intro {
+  max-width: 1320px;
+  padding-inline: 64px;
+  text-align: center;
+}
+.contact-page-intro .reservation-intro__ornament {
+  margin-bottom: 18px;
+}
+.contact-page-intro h1 {
+  margin: 0 auto 24px;
+}
+.contact-page-intro > p:last-child {
+  margin-inline: auto;
+}
+@media (min-width: 1600px) {
+  .contact-page-intro {
+    max-width: 1460px;
+  }
+}
+.contact-details > section:nth-child(2) {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.contact-details > section:nth-child(2) h2 {
+  margin-bottom: 15px;
+}
+.contact-details > section:nth-child(2) > a {
+  display: block;
+  margin-bottom: 8px;
+}
+.contact-details > section:nth-child(2) > .instagram-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+}
+@media (max-width: 1100px) {
+  .contact-page-intro {
+    padding-inline: 36px;
+  }
+}
+@media (max-width: 800px) {
+  .contact-page-intro {
+    padding-inline: 24px;
+  }
+}
+@media (max-width: 420px) {
+  .contact-page-intro {
+    padding-inline: 20px;
+  }
 }
 .quick-strip {
   padding-inline: 64px;
@@ -5850,4 +5917,157 @@ body:has(.home-redesign) .footer-bottom {
   .home-craft__detail { transform: rotate(1.5deg) !important; }
   .home-door__image,
   .home-door__panel { clip-path: inset(0) !important; transition: none !important; }
+}
+
+.home-hero {
+  position: relative;
+  isolation: isolate;
+}
+.home-hero__inner {
+  z-index: 1;
+}
+.home-hero__botanical {
+  position: absolute;
+  z-index: 0;
+  top: 170px;
+  left: -14vw;
+  width: clamp(360px, 42vw, 520px) !important;
+  height: auto !important;
+  object-fit: contain;
+  opacity: 0.06;
+  pointer-events: none;
+  user-select: none;
+  transform-origin: center;
+  transform: scaleX(-1);
+}
+@media (max-width: 800px) {
+  .home-hero__botanical {
+    top: 100px;
+    left: -19.5vw;
+    width: min(64vw, 330px) !important;
+    opacity: 0.05;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .home-hero__botanical {
+    transform: scaleX(-1);
+  }
+}
+
+/* Illustrations décoratives du parcours de réservation. */
+.reservation-page-shell {
+  isolation: isolate;
+}
+.reservation-page-shell > * {
+  position: relative;
+  z-index: 1;
+}
+.reservation-page-shell::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  top: 105px;
+  left: -58px;
+  width: 390px;
+  height: 585px;
+  background: url("/img/reservation/herb-wreath.webp") left center / contain no-repeat;
+  opacity: 0.12;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+.ambassade-booking {
+  isolation: isolate;
+}
+.ambassade-booking::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  right: -18px;
+  bottom: 0;
+  width: 360px;
+  height: 500px;
+  background: url("/img/reservation/drink-illustration.webp") center bottom / contain no-repeat;
+  opacity: 0.1;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+@media (max-width: 1100px) {
+  .reservation-page-shell::before {
+    left: -110px;
+    width: 340px;
+    opacity: 0.09;
+  }
+  .ambassade-booking::after {
+    right: -10px;
+    width: 300px;
+    opacity: 0.08;
+  }
+}
+@media (max-width: 800px) {
+  .reservation-page-shell::before,
+  .ambassade-booking::after {
+    display: none;
+  }
+}
+
+/* Révélation séquencée des étapes de la page Réservation. */
+.reservation-page-shell .reservation-intro > .reservation-intro__ornament,
+.reservation-page-shell .reservation-intro > h1,
+.reservation-page-shell .reservation-intro > p {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reservation-page-shell .reservation-intro.is-visible > .reservation-intro__ornament,
+.reservation-page-shell .reservation-intro.is-visible > h1,
+.reservation-page-shell .reservation-intro.is-visible > p {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reservation-page-shell .reservation-intro.is-visible > .reservation-intro__ornament { transition-delay: 80ms; }
+.reservation-page-shell .reservation-intro.is-visible > h1 { transition-delay: 190ms; }
+.reservation-page-shell .reservation-intro.is-visible > p { transition-delay: 300ms; }
+.ambassade-booking .ambassade-booking__heading h2,
+.ambassade-booking .ambassade-booking__heading .garden-ornament,
+.ambassade-booking .ambassade-booking__heading > p,
+.ambassade-booking .ambassade-booking-steps,
+.ambassade-booking .ambassade-booking__main,
+.ambassade-booking .ambassade-booking-summary {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.ambassade-booking.is-visible .ambassade-booking__heading h2,
+.ambassade-booking.is-visible .ambassade-booking__heading .garden-ornament,
+.ambassade-booking.is-visible .ambassade-booking__heading > p,
+.ambassade-booking.is-visible .ambassade-booking-steps,
+.ambassade-booking.is-visible .ambassade-booking__main,
+.ambassade-booking.is-visible .ambassade-booking-summary {
+  opacity: 1;
+  transform: translateY(0);
+}
+.ambassade-booking.is-visible .ambassade-booking__heading h2 { transition-delay: 80ms; }
+.ambassade-booking.is-visible .ambassade-booking__heading .garden-ornament { transition-delay: 170ms; }
+.ambassade-booking.is-visible .ambassade-booking__heading > p { transition-delay: 260ms; }
+.ambassade-booking.is-visible .ambassade-booking-steps { transition-delay: 370ms; }
+.ambassade-booking.is-visible .ambassade-booking__main { transition-delay: 490ms; }
+.ambassade-booking.is-visible .ambassade-booking-summary { transition-delay: 610ms; }
+@media (prefers-reduced-motion: reduce) {
+  .reservation-page-shell .reservation-intro > .reservation-intro__ornament,
+  .reservation-page-shell .reservation-intro > h1,
+  .reservation-page-shell .reservation-intro > p,
+  .ambassade-booking .ambassade-booking__heading h2,
+  .ambassade-booking .ambassade-booking__heading .garden-ornament,
+  .ambassade-booking .ambassade-booking__heading > p,
+  .ambassade-booking .ambassade-booking-steps,
+  .ambassade-booking .ambassade-booking__main,
+  .ambassade-booking .ambassade-booking-summary {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }

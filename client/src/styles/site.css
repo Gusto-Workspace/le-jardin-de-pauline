@@ -4542,9 +4542,8 @@ body:has(.home-redesign) .footer-bottom {
 .carte-category__tagline {
   max-width: 390px;
   margin: 8px 0 0;
-  color: var(--terracotta);
-  font: italic 400 clamp(1.22rem, 1.8vw, 1.72rem)/1.16 "Playfair Display", Georgia, serif;
-  letter-spacing: -0.035em;
+  color: rgb(202 176 156);
+  font: 400 0.95rem/1.5 "DM Sans", sans-serif;
 }
 .carte-dishes {
   min-width: 0;
@@ -4594,6 +4593,23 @@ body:has(.home-redesign) .footer-bottom {
   margin-bottom: 12px;
   color: var(--terracotta);
   font-size: 0.75rem;
+}
+.carte-mini-boss .carte-dish h3 {
+  font-size: 0.98rem;
+}
+.carte-mini-boss .carte-dish p {
+  font-size: 0.95rem;
+}
+.carte-mini-boss .carte-dishes__sub > h3 {
+  font-size: 0.88rem;
+}
+.carte-dishes__or,
+.carte-menu-dish__or {
+  display: block;
+  margin: 5px 0;
+  color: var(--terracotta);
+  font-size: 0.95rem;
+  font-weight: 600;
 }
 .carte-menu-groups {
   display: flex;
@@ -4785,8 +4801,18 @@ body:has(.home-redesign) .footer-bottom {
 }
 .carte-mini-boss__intro > p:not(.eyebrow, .carte-mini-boss__tagline) {
   color: var(--muted);
-  font-size: 0.86rem;
+  font-size: 1rem;
   line-height: 1.5;
+}
+.carte-mini-boss .carte-menu-group__title h3 {
+  font-size: 0.98rem;
+}
+.carte-mini-boss .carte-menu-dish {
+  font-size: 1rem;
+  line-height: 1.5;
+}
+.carte-mini-boss .carte-menu-dish small {
+  font-size: 0.92rem;
 }
 .carte-mini-boss__aside {
   position: relative;
@@ -4800,11 +4826,7 @@ body:has(.home-redesign) .footer-bottom {
 .carte-mini-boss__aside p {
   margin: 0;
   font: italic 400 1.2rem/1.5 "Playfair Display", Georgia, serif;
-}
-.carte-mini-boss__aside span {
-  display: block;
-  margin-top: 7px;
-  color: var(--green);
+  text-wrap: balance;
 }
 .carte-quote-band {
   position: relative;
@@ -5415,9 +5437,6 @@ body:has(.home-redesign) .footer-bottom {
   }
   .carte-category__heading h2 {
     font-size: clamp(2.55rem, 9vw, 3.8rem);
-  }
-  .carte-category__tagline {
-    font-size: clamp(1.15rem, 4.5vw, 1.5rem);
   }
   .boissons-wine-prices {
     gap: 10px;

@@ -1,7 +1,7 @@
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import { useContext } from "react";
+import { Fragment, useContext } from "react";
 import { Clock3, MapPin, Phone } from "lucide-react";
 import SiteShell from "@/components/site-shell.component";
 import { ApiState, Reveal, useScrollReveal } from "@/components/shared.component";
@@ -11,31 +11,19 @@ import { formatPrice, getAddress, getDishSections, getHours, getMenus } from "@/
 
 const featuredCategories = [
   {
-    key: "salades",
     label: "Salades",
-    eyebrow: "Des produits frais et colorés",
-    tagline: "Des assiettes pleines de fraîcheur, généreuses et de saison.",
     matches: (name) => /salade/.test(name),
   },
   {
-    key: "burgers",
     label: "Burgers",
-    eyebrow: "Des burgers qui ont du caractère",
-    tagline: "Des recettes gourmandes qui sortent des sentiers battus.",
     matches: (name) => /burger/.test(name),
   },
   {
-    key: "brioches-perdues",
     label: "Brioches perdues",
-    eyebrow: "L’originalité dans une brioche",
-    tagline: "Des récréations réconfortantes et pleines de surprises.",
     matches: (name) => /brioche/.test(name) && /perdue/.test(name),
   },
   {
-    key: "suggestions",
     label: "Suggestions",
-    eyebrow: "Nos inspirations du moment",
-    tagline: "Des assiettes créatives, au gré de nos envies et des saisons.",
     matches: (name) => /suggestion/.test(name),
   },
 ];
@@ -169,9 +157,8 @@ function DishCategory({ section, category, index }) {
     <Reveal as="section" className={`carte-category ${index % 2 ? "carte-category--warm" : ""}`} delay={Math.min(index * 70, 210)} threshold={0.08}>
       <div className="carte-category__inner container">
         <div className="carte-category__heading">
-          <p className="eyebrow">{category.eyebrow}</p>
           <h2>{section.name || category.label}</h2>
-          <p className="carte-category__tagline">{section.description || category.tagline}</p>
+          {section.description ? <p className="carte-category__tagline">{section.description}</p> : null}
         </div>
         <DishList section={section} />
       </div>
@@ -184,7 +171,6 @@ function ExtraDishCategory({ section, index }) {
     <Reveal as="section" className={`carte-category ${index % 2 ? "carte-category--warm" : ""}`} delay={Math.min(index * 60, 180)} threshold={0.08}>
       <div className="carte-category__inner container">
         <div className="carte-category__heading">
-          <p className="eyebrow">La sélection du moment</p>
           <h2>{section.name}</h2>
           {section.description ? <p className="carte-category__tagline">{section.description}</p> : null}
         </div>
@@ -194,13 +180,19 @@ function ExtraDishCategory({ section, index }) {
   );
 }
 
-function DishList({ section }) {
+function DishList({ section, showAlternatives = false }) {
   return (
     <div className="carte-dishes">
-      {section.items.map((item) => <DishRow key={item.id} item={item} />)}
+      {section.items.map((item, index) => <Fragment key={item.id}>
+        <DishRow item={item} />
+        {showAlternatives && index < section.items.length - 1 ? <span className="carte-dishes__or">ou</span> : null}
+      </Fragment>)}
       {section.subCategories.map((sub) => <div className="carte-dishes__sub" key={sub.id}>
         <h3>{sub.name}</h3>
-        {sub.items.map((item) => <DishRow key={item.id} item={item} />)}
+        {sub.items.map((item, index) => <Fragment key={item.id}>
+          <DishRow item={item} />
+          {showAlternatives && index < sub.items.length - 1 ? <span className="carte-dishes__or">ou</span> : null}
+        </Fragment>)}
       </div>)}
     </div>
   );
@@ -218,7 +210,7 @@ function DishRow({ item }) {
   );
 }
 
-function MenuGroups({ menu, section, numbered = false }) {
+function MenuGroups({ menu, section, numbered = false, showAlternatives = false }) {
   const groups = getMenuGroups(menu);
   if (groups.length) {
     return <div className={`carte-menu-groups ${numbered ? "carte-menu-groups--numbered" : ""}`}>
@@ -231,7 +223,10 @@ function MenuGroups({ menu, section, numbered = false }) {
               <h3>{group.categoryName || (group.categories || []).join(" + ") || `Étape ${index + 1}`}</h3>
               {formatPrice(group.price) ? <strong>{formatPrice(group.price)}</strong> : null}
             </div>
-            {dishes.map((dish, dishIndex) => <MenuDish key={dish?._id || dishIndex} dish={dish} />)}
+            {dishes.map((dish, dishIndex) => <Fragment key={dish?._id || dishIndex}>
+              <MenuDish dish={dish} />
+              {showAlternatives && dishIndex < dishes.length - 1 ? <span className="carte-menu-dish__or">ou</span> : null}
+            </Fragment>)}
           </div>
         </div>;
       })}
@@ -282,13 +277,11 @@ function MiniBossFeature({ menu, section }) {
           <h2>Mini Boss</h2>
           <p className="carte-mini-boss__tagline">Enfant de moins de 10 ans</p>
           {formatPrice(menu?.price) ? <strong className="carte-mini-boss__price">{formatPrice(menu.price)}</strong> : null}
-          {menu?.description ? <p>{menu.description}</p> : null}
-          {section ? <DishList section={section} /> : null}
-          {menu ? <MenuGroups menu={menu} /> : null}
+          {section ? <DishList section={section} showAlternatives /> : null}
+          {menu ? <MenuGroups menu={menu} showAlternatives /> : null}
         </div>
         <aside className="carte-mini-boss__aside">
           <p>Les grandes gourmandises commencent aussi dès le plus jeune âge&nbsp;!</p>
-          <span aria-hidden="true">♡</span>
         </aside>
       </div>
     </Reveal>

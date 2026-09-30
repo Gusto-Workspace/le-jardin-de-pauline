@@ -199,10 +199,12 @@ function DishList({ section, showAlternatives = false }) {
 }
 
 function DishRow({ item }) {
+  const { title, subtitle } = splitDishName(item.name);
   return (
     <article className="carte-dish">
       <div>
-        <h3>{item.name}{item.bio ? <small> BIO</small> : null}</h3>
+        <h3>{title}{item.bio ? <small> BIO</small> : null}</h3>
+        {subtitle ? <p className="carte-dish__subtitle">{subtitle}</p> : null}
         {item.description ? <p>{item.description}</p> : null}
       </div>
       {item.price ? <strong>{item.price}</strong> : null}
@@ -238,7 +240,13 @@ function MenuGroups({ menu, section, numbered = false, showAlternatives = false 
 function MenuDish({ dish }) {
   const name = typeof dish === "string" ? dish : (dish?.name || "");
   const description = typeof dish === "object" ? String(dish?.description || "").trim() : "";
-  return <p className="carte-menu-dish">{name}{description ? <small>{description}</small> : null}</p>;
+  const { title, subtitle } = splitDishName(name);
+  return <p className="carte-menu-dish">{title}{subtitle ? <small className="carte-menu-dish__subtitle">{subtitle}</small> : null}{description ? <small>{description}</small> : null}</p>;
+}
+
+function splitDishName(name) {
+  const [title, ...subtitleParts] = String(name || "").split(":");
+  return { title: title.trim(), subtitle: subtitleParts.join(":").trim() };
 }
 
 function BrunchFeature({ menu, section }) {
@@ -250,12 +258,12 @@ function BrunchFeature({ menu, section }) {
           <h2>Brunch</h2>
           <p className="carte-brunch__tagline">Un moment gourmand<br />à partager sans modération.</p>
           {formatPrice(menu?.price) ? <strong className="carte-brunch__price">{formatPrice(menu.price)}</strong> : null}
-          {menu?.description ? <p className="carte-brunch__description">{menu.description}</p> : <p className="carte-brunch__description">Il ne se prend pas au sérieux, mais il cartonne.</p>}
         </div>
         <div className="carte-brunch__photo">
           <Image src="/img/home/brunch.webp" alt="Brunch gourmand servi au Jardin de Pauline" width={2400} height={3600} sizes="(max-width: 800px) 78vw, 34vw" />
         </div>
         <div className="carte-brunch__formula">
+          <p className="carte-brunch__description">{menu?.description || "Il ne se prend pas au sérieux, mais il cartonne."}</p>
           <MenuGroups menu={menu} section={section} numbered />
           {menu && getMenuGroups(menu).length && section ? <div className="carte-brunch__extra-dishes"><DishList section={section} /></div> : null}
           <p className="carte-brunch__note">Les plats du brunch sont proposés uniquement dans la formule.</p>

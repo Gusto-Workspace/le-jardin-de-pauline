@@ -5477,6 +5477,7 @@ body:has(.home-redesign) .footer-bottom {
   .carte-brunch__intro {
     padding: 48px 28px 34px;
     background: var(--green);
+    text-align: center;
   }
   .carte-brunch__photo {
     align-self: center;
@@ -5485,6 +5486,36 @@ body:has(.home-redesign) .footer-bottom {
   }
   .carte-brunch__formula {
     padding: 12px 28px 38px;
+    text-align: center;
+  }
+  .carte-brunch__description {
+    margin-inline: auto;
+  }
+  .carte-brunch .carte-menu-group {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  .carte-brunch .carte-menu-group__number {
+    justify-self: center;
+  }
+  .carte-brunch .carte-menu-group__title {
+    justify-content: center;
+    text-align: center;
+  }
+  .carte-brunch .carte-menu-group__content,
+  .carte-brunch .carte-menu-dish,
+  .carte-brunch .carte-dishes {
+    text-align: center;
+  }
+  .carte-brunch .carte-dish {
+    display: block;
+    text-align: center;
+  }
+  .carte-brunch .carte-dish > strong {
+    display: block;
+  }
+  .carte-brunch .carte-dishes__sub > h3 {
+    text-align: center;
   }
   .carte-mini-boss__inner {
     display: flex;
@@ -5500,6 +5531,7 @@ body:has(.home-redesign) .footer-bottom {
   }
   .carte-mini-boss__intro {
     order: 1;
+    text-align: center;
   }
   .carte-mini-boss__photo {
     order: 0;
@@ -5508,6 +5540,55 @@ body:has(.home-redesign) .footer-bottom {
     order: 2;
     max-width: 340px;
     align-self: center;
+    text-align: center;
+  }
+  .carte-mini-boss .carte-dish {
+    display: block;
+    text-align: center;
+  }
+  .carte-mini-boss .carte-dish > strong {
+    display: block;
+  }
+  .carte-mini-boss .carte-dishes,
+  .carte-mini-boss .carte-menu-groups,
+  .carte-mini-boss .carte-menu-group__content,
+  .carte-mini-boss .carte-menu-dish {
+    text-align: center;
+  }
+  .carte-mini-boss .carte-menu-group__title {
+    justify-content: center;
+  }
+  .carte-mini-boss .carte-dishes__sub > h3 {
+    text-align: center;
+  }
+  .carte-extra-menus {
+    text-align: center;
+  }
+  .carte-extra-menu__title {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  .carte-extra-menu > p,
+  .carte-extra-menu__intro {
+    text-align: center;
+  }
+  .carte-extra-menu--lunch-options .carte-extra-menu__intro {
+    align-items: center;
+  }
+  .carte-extra-menu--lunch-options .carte-menu-group__title {
+    justify-content: center;
+    text-align: center;
+  }
+  .carte-extra-menu--lunch-options .carte-menu-group {
+    grid-template-columns: 1fr;
+  }
+  .carte-extra-menu--lunch-options .carte-menu-group__number {
+    justify-self: center;
+  }
+  .carte-extra-menu--lunch-options .carte-menu-group__content,
+  .carte-extra-menu--lunch-options .carte-menu-dish {
+    text-align: center;
   }
   .carte-practical__inner {
     grid-template-columns: 1fr;

@@ -1151,6 +1151,10 @@ p {
 .api-state--error {
   background: #f5e4df;
 }
+.api-state--empty {
+  margin: 80px auto;
+  background: rgba(201, 175, 156, 0.23);
+}
 .reservation-intro {
   padding: 66px 64px 15px;
 }

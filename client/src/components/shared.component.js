@@ -47,6 +47,6 @@ export function Invite({ title = "Le bonheur est aussi", italic = "dans les peti
 export function ApiState({ loading, error, empty, children }) {
   if (loading) return <div className="api-state">Le jardin prépare la sélection…</div>;
   if (error) return <div className="api-state api-state--error">La sélection n’est pas disponible pour le moment.</div>;
-  if (empty) return <div className="api-state">La sélection sera bientôt disponible.</div>;
+  if (empty) return <div className="api-state api-state--empty">La carte sera bientôt disponible</div>;
   return children;
 }

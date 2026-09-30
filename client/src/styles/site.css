@@ -4514,7 +4514,7 @@ body:has(.home-redesign) .footer-bottom {
   grid-template-columns: minmax(0, 0.88fr) minmax(0, 1.12fr);
   align-items: start;
   gap: clamp(42px, 7vw, 108px);
-  min-height: 275px;
+  min-height: 0;
   padding-top: 42px;
   padding-bottom: 42px;
 }
@@ -4544,6 +4544,7 @@ body:has(.home-redesign) .footer-bottom {
   margin: 8px 0 0;
   color: rgb(202 176 156);
   font: 400 0.95rem/1.5 "DM Sans", sans-serif;
+  text-wrap: pretty;
 }
 .carte-dishes {
   min-width: 0;

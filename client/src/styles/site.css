@@ -4546,6 +4546,17 @@ body:has(.home-redesign) .footer-bottom {
   font: 400 0.95rem/1.5 "DM Sans", sans-serif;
   text-wrap: pretty;
 }
+.boissons-sub-category--described > h3 {
+  margin-bottom: 0;
+}
+.boissons-sub-category > h3 {
+  font-size: 0.85rem;
+}
+.boissons-sub-category--described > .carte-category__tagline {
+  margin-top: 1px;
+  font-size: 0.8rem;
+  font-style: italic;
+}
 .carte-dishes {
   min-width: 0;
 }

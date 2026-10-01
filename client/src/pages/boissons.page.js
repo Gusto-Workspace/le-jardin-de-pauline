@@ -88,7 +88,7 @@ function WineSection({ sections, delay }) {
 function DrinkItems({ section, wines = false }) {
   return <div className="carte-dishes boissons-dishes">
     {section.items.map((item) => <DrinkItem key={item.id} item={item} wines={wines} />)}
-    {section.subCategories.map((sub) => <div className="carte-dishes__sub boissons-sub-category" key={sub.id}>
+    {section.subCategories.map((sub) => <div className={`carte-dishes__sub boissons-sub-category ${sub.description ? "boissons-sub-category--described" : ""}`} key={sub.id}>
       <h3>{sub.name}</h3>
       {sub.description ? <p className="carte-category__tagline">{sub.description}</p> : null}
       {sub.items.map((item) => <DrinkItem key={item.id} item={item} wines={wines} />)}

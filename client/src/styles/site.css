@@ -948,14 +948,15 @@ p {
   }
 }
 
-/* Page Actualités et apparition du lien lorsque le restaurant publie du contenu. */
-@keyframes garden-news-slide-down {
-  from { opacity: 0; transform: translateY(-10px); }
-  to { opacity: 1; transform: translateY(0); }
+/* La navigation attend les données publiques puis entre par le haut, comme sur Le Ventadour. */
+.header {
+  transition: opacity 350ms ease, transform 350ms ease;
 }
-.desktop-nav .news-nav-link,
-.mobile-drawer nav .news-nav-link {
-  animation: garden-news-slide-down 480ms cubic-bezier(0.22, 1, 0.36, 1) both;
+.header--news-pending {
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(-12px);
+  pointer-events: none;
 }
 .news-page {
   overflow: hidden;
@@ -1064,6 +1065,131 @@ p {
   color: var(--muted);
   white-space: pre-line;
 }
+.news-card__read {
+  display: inline-flex;
+  align-items: center;
+  gap: 18px;
+  margin-top: 24px;
+  padding: 8px 0;
+  border: 0;
+  border-bottom: 1px solid var(--terracotta);
+  background: transparent;
+  color: var(--green);
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.news-card__read:hover {
+  color: var(--terracotta);
+}
+.news-card__read:focus-visible,
+.news-modal button:focus-visible {
+  outline: 2px solid var(--terracotta);
+  outline-offset: 4px;
+}
+.news-modal {
+  position: fixed;
+  z-index: 110;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+}
+.news-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  border: 0;
+  background: rgba(23, 37, 30, 0.76);
+  cursor: pointer;
+}
+.news-modal > article {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 760px);
+  max-height: 90vh;
+  overflow: auto;
+  padding: clamp(26px, 5vw, 48px);
+  background: var(--paper);
+  box-shadow: 0 28px 80px #101b1640;
+}
+.news-modal__close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  display: grid;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  color: var(--green);
+  cursor: pointer;
+}
+.news-modal > article > .eyebrow {
+  padding-right: 45px;
+  color: var(--terracotta);
+}
+.news-modal h2 {
+  margin: 18px 0 24px;
+  color: var(--green);
+  font-size: clamp(2.1rem, 4vw, 3.2rem);
+}
+.news-modal__image {
+  position: relative;
+  height: min(48vh, 420px);
+  min-height: 220px;
+  overflow: hidden;
+  background: #e8dfd2;
+}
+.news-modal__image img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.news-modal__body {
+  margin-top: 24px;
+  color: var(--muted);
+  font-size: 0.98rem;
+  line-height: 1.85;
+}
+.news-modal__body p,
+.news-modal__body ul,
+.news-modal__body ol,
+.news-modal__body blockquote {
+  margin: 0 0 1em;
+}
+.news-modal__body ul,
+.news-modal__body ol {
+  padding-left: 1.5em;
+}
+.news-modal__body ul { list-style: disc; }
+.news-modal__body ol { list-style: decimal; }
+.news-modal__body h2,
+.news-modal__body h3,
+.news-modal__body h4 {
+  margin: 1.2em 0 0.45em;
+  color: var(--green);
+  font-family: "Playfair Display", Georgia, serif;
+  line-height: 1.2;
+}
+.news-modal__body h2 { font-size: 1.8rem; }
+.news-modal__body h3 { font-size: 1.45rem; }
+.news-modal__body h4 { font-size: 1.2rem; }
+.news-modal__body a {
+  color: var(--green);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.news-modal__body blockquote {
+  border-left: 2px solid var(--terracotta);
+  padding-left: 1em;
+  font-family: "Playfair Display", Georgia, serif;
+  font-style: italic;
+}
 .news-invite {
   position: relative;
   display: flex;
@@ -1154,6 +1280,20 @@ p {
   .news-card__copy h2 {
     font-size: clamp(2rem, 9vw, 2.8rem);
   }
+  .news-modal {
+    padding: 12px;
+  }
+  .news-modal > article {
+    max-height: 94vh;
+    padding: 52px 22px 28px;
+  }
+  .news-modal__image {
+    height: min(38vh, 340px);
+    min-height: 190px;
+  }
+  .news-modal__body {
+    font-size: 0.92rem;
+  }
   .news-invite {
     padding: 78px 22px 86px;
   }
@@ -1169,13 +1309,6 @@ p {
     width: 280px;
   }
 }
-@media (prefers-reduced-motion: reduce) {
-  .desktop-nav .news-nav-link,
-  .mobile-drawer nav .news-nav-link {
-    animation: none;
-  }
-}
-
 /* Application Next.js : navigation et données Gusto */
 .desktop-nav {
   display: flex;

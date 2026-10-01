@@ -72,11 +72,11 @@ export function Header() {
     <>
       <a className="skip" href="#contenu">Aller au contenu</a>
       <div className="topbar">DÉJEUNER · BRUNCH · GOÛTER</div>
-      <header className="header container">
+      <header className={`header container${newsCheckResolved ? "" : " header--news-pending"}`} aria-hidden={!newsCheckResolved}>
         <Link href="/" aria-label="Le Jardin de Pauline, accueil"><Brand logo /></Link>
         <nav className="desktop-nav" aria-label="Navigation principale">
           {links.map(([label, href]) => (
-            <Link className={href === "/news" ? "news-nav-link" : undefined} key={href} href={href} aria-current={router.pathname === href ? "page" : undefined}>{label}</Link>
+            <Link key={href} href={href} aria-current={router.pathname === href ? "page" : undefined}>{label}</Link>
           ))}
           <Link className="btn" href="/reservation">Réserver une table</Link>
         </nav>
@@ -88,7 +88,7 @@ export function Header() {
       <aside id="mobile-navigation" className={`mobile-drawer ${open ? "is-open" : ""}`} aria-hidden={!open}>
         <div className="mobile-drawer__top"><Brand logo /><button type="button" aria-label="Fermer le menu" onClick={() => setOpen(false)}><X /></button></div>
         <nav aria-label="Navigation mobile">
-          {links.map(([label, href], index) => <Link className={href === "/news" ? "news-nav-link" : undefined} key={href} href={href} tabIndex={open ? 0 : -1}><small>0{index + 1}</small><span>{label}</span></Link>)}
+          {links.map(([label, href], index) => <Link key={href} href={href} tabIndex={open ? 0 : -1}><small>0{index + 1}</small><span>{label}</span></Link>)}
         </nav>
         <Link className="btn" href="/reservation" tabIndex={open ? 0 : -1}>Réserver une table <span>↗</span></Link>
         <p>{address.length ? address.map((line) => <span key={line}>{line}<br /></span>) : <>Passage du Vieux Palais<br />Montauban</>}</p>

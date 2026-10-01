@@ -1,7 +1,9 @@
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import { useContext, useMemo } from "react";
+import { ArrowRight, X } from "lucide-react";
+import { useCallback, useContext, useEffect, useMemo, useState } from "react";
+import { useRouter } from "next/router";
 import SiteShell from "@/components/site-shell.component";
 import { Reveal } from "@/components/shared.component";
 import { HomeBand } from "@/components/home-banners.component";
@@ -9,9 +11,42 @@ import { GlobalContext } from "@/contexts/global.context";
 import { formatNewsDate, getVisibleNews, stripNewsHtml } from "@/utils/news";
 
 export default function NewsPage() {
+  const router = useRouter();
   const { restaurantContext } = useContext(GlobalContext);
   const restaurant = restaurantContext?.restaurantData;
   const news = useMemo(() => getVisibleNews(restaurant), [restaurant]);
+  const [selected, setSelected] = useState(null);
+  const requestedArticleId = Array.isArray(router.query.article) ? router.query.article[0] : router.query.article;
+
+  const closeArticle = useCallback(() => {
+    setSelected(null);
+    if (!requestedArticleId) return;
+    const query = { ...router.query };
+    delete query.article;
+    router.replace({ pathname: router.pathname, query }, undefined, { shallow: true, scroll: false });
+  }, [requestedArticleId, router]);
+
+  useEffect(() => {
+    if (!router.isReady || restaurantContext?.dataLoading || !requestedArticleId) return;
+    const article = news.find((item) => String(item?._id) === String(requestedArticleId));
+    setSelected(article || null);
+  }, [news, requestedArticleId, router.isReady, restaurantContext?.dataLoading]);
+
+  useEffect(() => {
+    if (!selected) return undefined;
+    const previousOverflow = document.body.style.overflow;
+    const previousPaddingRight = document.body.style.paddingRight;
+    const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+    document.body.style.overflow = "hidden";
+    if (scrollbarWidth > 0) document.body.style.paddingRight = `${scrollbarWidth}px`;
+    const onKeyDown = (event) => { if (event.key === "Escape") closeArticle(); };
+    document.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      document.body.style.paddingRight = previousPaddingRight;
+      document.removeEventListener("keydown", onKeyDown);
+    };
+  }, [closeArticle, selected]);
 
   return <>
     <Head>
@@ -50,6 +85,7 @@ export default function NewsPage() {
                 {published ? <time dateTime={item.published_at}>{published}</time> : null}
                 <h2>{item?.title || "Une nouvelle du jardin"}</h2>
                 {description ? <p className="news-card__description">{description}</p> : null}
+                <button type="button" className="news-card__read" onClick={() => setSelected(item)}>Lire l’article <ArrowRight size={18} strokeWidth={1.5} /></button>
               </div>
             </Reveal>;
           })}
@@ -63,6 +99,16 @@ export default function NewsPage() {
           <div className="home-actions"><Link className="btn" href="/reservation">Réserver une table <span>↗</span></Link><Link className="btn home-secondary-btn" href="/contact">Nous trouver <span>→</span></Link></div>
         </Reveal>
       </div>
+      {selected ? <div className="news-modal" role="dialog" aria-modal="true" aria-labelledby="news-modal-title">
+        <button type="button" className="news-modal__backdrop" onClick={closeArticle} aria-label="Fermer l’article" />
+        <article>
+          <button type="button" className="news-modal__close" onClick={closeArticle} aria-label="Fermer l’article"><X size={24} strokeWidth={1.4} /></button>
+          <p className="eyebrow">Le Jardin de Pauline · {formatNewsDate(selected.published_at) || "Actualité"}</p>
+          <h2 id="news-modal-title">{selected.title}</h2>
+          <div className="news-modal__image"><Image src={selected.image || "/img/home/hero-detail.webp"} alt={selected.title || "Actualité du Jardin de Pauline"} fill sizes="(max-width: 800px) 100vw, 720px" unoptimized /></div>
+          {selected.description ? <div className="news-modal__body" dangerouslySetInnerHTML={{ __html: selected.description }} /> : null}
+        </article>
+      </div> : null}
     </SiteShell>
   </>;
 }

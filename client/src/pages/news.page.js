@@ -8,7 +8,7 @@ import SiteShell from "@/components/site-shell.component";
 import { Reveal } from "@/components/shared.component";
 import { HomeBand } from "@/components/home-banners.component";
 import { GlobalContext } from "@/contexts/global.context";
-import { formatNewsDate, getVisibleNews, stripNewsHtml } from "@/utils/news";
+import { formatNewsDate, getVisibleNews } from "@/utils/news";
 
 export default function NewsPage() {
   const router = useRouter();
@@ -74,7 +74,6 @@ export default function NewsPage() {
           {!restaurantContext?.dataLoading && restaurantContext?.dataError ? <p className="news-state" role="alert">Les actualités sont momentanément indisponibles. Réessayez dans un instant.</p> : null}
           {!restaurantContext?.dataLoading && !restaurantContext?.dataError && news.length === 0 ? <p className="news-state">Aucune actualité pour le moment. Revenez bientôt nous voir.</p> : null}
           {news.map((item, index) => {
-            const description = stripNewsHtml(item?.description);
             const published = formatNewsDate(item?.published_at);
             return <Reveal as="article" className={`news-card${index === 0 ? " news-card--featured" : ""}`} key={item?._id || `${item?.title}-${index}`} delay={Math.min(index * 70, 280)} threshold={0.08}>
               <div className="news-card__image">
@@ -84,7 +83,7 @@ export default function NewsPage() {
                 <p className="eyebrow">Au fil des saisons</p>
                 {published ? <time dateTime={item.published_at}>{published}</time> : null}
                 <h2>{item?.title || "Une nouvelle du jardin"}</h2>
-                {description ? <p className="news-card__description">{description}</p> : null}
+                {item?.description ? <div className="news-card__preview news-richtext" dangerouslySetInnerHTML={{ __html: item.description }} /> : null}
                 <button type="button" className="news-card__read" onClick={() => setSelected(item)}>Lire l’article <ArrowRight size={18} strokeWidth={1.5} /></button>
               </div>
             </Reveal>;
@@ -106,7 +105,7 @@ export default function NewsPage() {
           <p className="eyebrow">Le Jardin de Pauline · {formatNewsDate(selected.published_at) || "Actualité"}</p>
           <h2 id="news-modal-title">{selected.title}</h2>
           <div className="news-modal__image"><Image src={selected.image || "/img/home/hero-detail.webp"} alt={selected.title || "Actualité du Jardin de Pauline"} fill sizes="(max-width: 800px) 100vw, 720px" unoptimized /></div>
-          {selected.description ? <div className="news-modal__body" dangerouslySetInnerHTML={{ __html: selected.description }} /> : null}
+          {selected.description ? <div className="news-modal__body news-richtext" dangerouslySetInnerHTML={{ __html: selected.description }} /> : null}
         </article>
       </div> : null}
     </SiteShell>

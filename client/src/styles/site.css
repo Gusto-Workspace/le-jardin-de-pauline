@@ -4549,7 +4549,7 @@ body:has(.home-redesign) .footer-bottom {
 .boissons-sub-category--described > h3 {
   margin-bottom: 0 !important;
 }
-.boissons-sub-category > h3 {
+.carte-dishes__sub.boissons-sub-category > h3 {
   font-size: 1.425rem;
 }
 .boissons-sub-category--described > .carte-category__tagline {

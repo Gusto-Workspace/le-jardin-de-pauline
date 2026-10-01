@@ -1,17 +1,19 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useMemo, useState } from "react";
 import { Instagram as InstagramIcon, Menu, X } from "lucide-react";
 import { GlobalContext } from "@/contexts/global.context";
 import { getAddress, getSocialUrl } from "@/utils/restaurant";
+import { hasVisibleNews } from "@/utils/news";
 
-const links = [
+const baseLinks = [
   ["Accueil", "/"],
   ["Carte & menus", "/carte-menus"],
   ["Boissons", "/boissons"],
   ["Contact", "/contact"],
 ];
+let hasResolvedInitialNewsCheck = false;
 
 function Brand({ logo = false }) {
   if (logo) return <Image className="brand-logo" src="/logo-transaprent.webp" alt="Le Jardin de Pauline" width={1536} height={1024} priority />;
@@ -27,8 +29,31 @@ function Brand({ logo = false }) {
 export function Header() {
   const router = useRouter();
   const [open, setOpen] = useState(false);
+  const [newsCheckResolved, setNewsCheckResolved] = useState(hasResolvedInitialNewsCheck);
   const { restaurantContext } = useContext(GlobalContext);
   const address = getAddress(restaurantContext?.restaurantData);
+  const restaurant = restaurantContext?.restaurantData;
+  const links = useMemo(() => {
+    const items = [...baseLinks];
+    if (newsCheckResolved && hasVisibleNews(restaurant)) items.splice(3, 0, ["Actualités", "/news"]);
+    return items;
+  }, [newsCheckResolved, restaurant]);
+
+  useEffect(() => {
+    if (newsCheckResolved) return undefined;
+    if (restaurant || !restaurantContext?.dataLoading) {
+      const frame = window.requestAnimationFrame(() => {
+        hasResolvedInitialNewsCheck = true;
+        setNewsCheckResolved(true);
+      });
+      return () => window.cancelAnimationFrame(frame);
+    }
+    const fallback = window.setTimeout(() => {
+      hasResolvedInitialNewsCheck = true;
+      setNewsCheckResolved(true);
+    }, 500);
+    return () => window.clearTimeout(fallback);
+  }, [newsCheckResolved, restaurant, restaurantContext?.dataLoading]);
 
   useEffect(() => setOpen(false), [router.asPath]);
   useEffect(() => {
@@ -51,7 +76,7 @@ export function Header() {
         <Link href="/" aria-label="Le Jardin de Pauline, accueil"><Brand logo /></Link>
         <nav className="desktop-nav" aria-label="Navigation principale">
           {links.map(([label, href]) => (
-            <Link key={href} href={href} aria-current={router.pathname === href ? "page" : undefined}>{label}</Link>
+            <Link className={href === "/news" ? "news-nav-link" : undefined} key={href} href={href} aria-current={router.pathname === href ? "page" : undefined}>{label}</Link>
           ))}
           <Link className="btn" href="/reservation">Réserver une table</Link>
         </nav>
@@ -63,7 +88,7 @@ export function Header() {
       <aside id="mobile-navigation" className={`mobile-drawer ${open ? "is-open" : ""}`} aria-hidden={!open}>
         <div className="mobile-drawer__top"><Brand logo /><button type="button" aria-label="Fermer le menu" onClick={() => setOpen(false)}><X /></button></div>
         <nav aria-label="Navigation mobile">
-          {links.map(([label, href], index) => <Link key={href} href={href} tabIndex={open ? 0 : -1}><small>0{index + 1}</small><span>{label}</span></Link>)}
+          {links.map(([label, href], index) => <Link className={href === "/news" ? "news-nav-link" : undefined} key={href} href={href} tabIndex={open ? 0 : -1}><small>0{index + 1}</small><span>{label}</span></Link>)}
         </nav>
         <Link className="btn" href="/reservation" tabIndex={open ? 0 : -1}>Réserver une table <span>↗</span></Link>
         <p>{address.length ? address.map((line) => <span key={line}>{line}<br /></span>) : <>Passage du Vieux Palais<br />Montauban</>}</p>

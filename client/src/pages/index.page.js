@@ -1,10 +1,11 @@
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import SiteShell from "@/components/site-shell.component";
-import { useScrollReveal } from "@/components/shared.component";
+import { Reveal, useScrollReveal } from "@/components/shared.component";
 import { HomeBand, HomeDoor } from "@/components/home-banners.component";
+import { GlobalContext } from "@/contexts/global.context";
 
 const revealProps = (reveal) => ({ ref: reveal.ref, style: reveal.style, className: reveal.className });
 
@@ -26,6 +27,7 @@ export default function HomePage() {
           <HomeStory />
           <HomeMoments />
           <HomeCraft />
+          <HomeServices />
           <HomeDoor />
           <HomeDrinks />
           <HomeFinal />
@@ -44,7 +46,7 @@ function HomeHero() {
       <Image className="home-hero__botanical" src="/img/home/hero-flower-branch.webp" alt="" aria-hidden="true" width={1254} height={1254} sizes="(max-width: 800px) 64vw, 42vw" />
       <div className="home-hero__inner container">
         <div {...revealProps(copy)} className={`home-hero__copy home-title-host ${copy.className}`}>
-          <p className="eyebrow">Le Jardin de Pauline · Montauban</p>
+          <p className="eyebrow home-hero__positioning"><span>Pâtisseries maison</span> · <span>Brunch</span> · <span>Coffee shop</span></p>
           <h1><TitleLine>Un jardin secret.</TitleLine><TitleLine delay={85}>Une pause</TitleLine><TitleLine as="em" delay={170}>gourmande.</TitleLine></h1>
           <p className="home-hero__lead">Au détour d’un passage, une cour fleurie, des douceurs maison et le plaisir de prendre le temps.</p>
           <div className="home-actions">
@@ -349,6 +351,61 @@ function useCraftParallax() {
   return ref;
 }
 
+function HomeServiceEmailLink({ email, subject, children }) {
+  if (!email) {
+    return <span className="text-link home-services__email-unavailable" aria-disabled="true" title="L’adresse email est momentanément indisponible.">{children} <span aria-hidden="true">↗</span></span>;
+  }
+  return <a className="text-link" href={`mailto:${email}?subject=${encodeURIComponent(`${subject} – Le Jardin de Pauline`)}`}>{children} <span aria-hidden="true">↗</span></a>;
+}
+
+function HomeServices() {
+  const { restaurantContext } = useContext(GlobalContext);
+  const email = restaurantContext.restaurantData?.email?.trim();
+  const heading = useScrollReveal({ threshold: 0.12 });
+
+  return (
+    <section className="home-services home-section" aria-labelledby="home-services-title">
+      <Image className="home-services__botanical" src="/img/home/botanical-branch.webp" alt="" aria-hidden="true" width={1024} height={1536} sizes="(max-width: 800px) 40vw, 24vw" />
+      <div className="home-services__inner container">
+        <div className="home-services__portrait">
+          <div {...revealProps(heading)} className={`home-services__heading home-title-host ${heading.className}`}>
+            <p className="eyebrow">Vos moments au jardin</p>
+            <h2 id="home-services-title"><TitleLine>Le Jardin</TitleLine><TitleLine as="em" delay={90}>se partage.</TitleLine></h2>
+          </div>
+          <Reveal className="home-services__photo" delay={100} threshold={0.1}>
+            <div className="home-services__cake-image home-image-frame"><Image src="/img/home/services-cake.webp" alt="Un gâteau entier maison du Jardin de Pauline, garni de fraises, de crème et de pistaches" fill sizes="(max-width: 800px) 85vw, 34vw" /></div>
+          </Reveal>
+        </div>
+        <div className="home-services__occasions">
+          <Reveal as="article" className="home-services__cake" threshold={0.1}>
+            <p className="eyebrow home-services__mention">Sur commande · 48 h à l’avance</p>
+            <h3>Un gâteau rien que pour vous.</h3>
+            <p className="home-services__description">Les pâtisseries du Jardin se commandent aussi en format entier pour vos anniversaires, déjeuners et moments à célébrer. Commande 48 h à l’avance.</p>
+            <HomeServiceEmailLink email={email} subject="Commande de gâteau">Commander un gâteau</HomeServiceEmailLink>
+          </Reveal>
+          <Reveal as="article" className="home-services__private" delay={80} threshold={0.1}>
+            <p className="eyebrow home-services__mention">Privatisation</p>
+            <h3>Le Jardin rien que pour vous.</h3>
+            <p className="home-services__description">Pour vos anniversaires, repas, retrouvailles ou événements, privatisez notre cour fleurie et notre intérieur intimiste.</p>
+            <p className="home-services__capacity">À partir de 15/20 personnes · Jusqu’à 40 personnes</p>
+            <HomeServiceEmailLink email={email} subject="Demande de privatisation">Parler de mon événement</HomeServiceEmailLink>
+          </Reveal>
+        </div>
+        <Reveal as="article" className="home-services__catering" threshold={0.1}>
+          <div>
+            <p className="eyebrow home-services__mention">Traiteur extérieur · Sucré · Salé</p>
+            <h3>Le Jardin vient à vous.</h3>
+          </div>
+          <div>
+            <p className="home-services__description">Pour vos événements à l’extérieur, Pauline imagine également des prestations traiteur sur mesure, sucrées ou salées.</p>
+            <HomeServiceEmailLink email={email} subject="Demande traiteur">Faire une demande</HomeServiceEmailLink>
+          </div>
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
 function HomeDrinks() {
   const copy = useScrollReveal({ threshold: 0.13 });
   const collage = useDrinksScrollAnimation();
@@ -357,7 +414,7 @@ function HomeDrinks() {
       <div {...revealProps(copy)} className={`home-drinks__copy home-title-host ${copy.className}`}>
         <p className="eyebrow">Nos boissons</p>
         <h2><TitleLine>Une pause,</TitleLine><TitleLine as="em" delay={90}>à boire aussi.</TitleLine></h2>
-        <p>Thés d’exception, créations maison, boissons fraîches et gourmandes… Il y en a pour tous les goûts et toutes les saisons.</p>
+        <p>Côté coffee shop, cafés, lattes, thés d’exception et créations maison rythment vos pauses, au fil des saisons.</p>
         <Link className="text-link" href="/boissons">Découvrir nos boissons <span>↗</span></Link>
       </div>
       <div ref={collage} className="home-drinks__collage">

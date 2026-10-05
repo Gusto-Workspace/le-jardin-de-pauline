@@ -32,7 +32,7 @@ export default function DrinksPage() {
         </div>
         <div ref={heroVisualReveal.ref} style={heroVisualReveal.style} className={`carte-hero__visual home-hero__visual carte-hero__visual--animated boissons-hero__visual ${heroVisualReveal.className}`} role="img" aria-label="Collage de boissons fraîches et gourmandes">
           <div className="carte-hero__photo carte-hero__photo--bao" aria-hidden="true">
-            <Image src="/img/boissons/hero-4191.webp" alt="" fill sizes="(max-width: 800px) 42vw, 240px" />
+            <Image src="/img/boissons/hero-gourmand.webp" alt="" fill sizes="(max-width: 800px) 42vw, 240px" />
           </div>
           <div className="carte-hero__photo carte-hero__photo--pastries" aria-hidden="true">
             <Image src="/img/boissons/hero-5182.webp" alt="" fill priority sizes="(max-width: 800px) 48vw, 290px" />

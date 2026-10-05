@@ -4146,6 +4146,145 @@ body {
   transform: none;
   box-shadow: none;
 }
+/* Services : une composition éditoriale ouverte, entre savoir-faire et cour. */
+.home-hero__positioning {
+  text-wrap: balance;
+}
+.home-hero__positioning > span {
+  white-space: nowrap;
+}
+.home-services {
+  padding-block: 135px 140px;
+  isolation: isolate;
+}
+.home-services__inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  column-gap: clamp(65px, 8vw, 125px);
+  row-gap: 75px;
+}
+.home-services__heading h2 {
+  font-size: clamp(3.8rem, 4.8vw, 5.45rem);
+  line-height: 1.04;
+  letter-spacing: -0.045em;
+  margin: 20px 0 38px;
+}
+.home-services__heading h2 em {
+  color: var(--terracotta);
+}
+.home-services__photo {
+  max-width: 370px;
+  margin-left: 20px;
+}
+.home-services__cake-image {
+  aspect-ratio: 4 / 3;
+  border: 7px solid var(--paper);
+  transform: rotate(-2deg);
+  box-shadow: 0 8px 22px rgb(104 124 103 / 0.12);
+}
+.home-services__cake-image img {
+  object-position: center 66%;
+}
+.home-services__occasions {
+  padding-top: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+}
+.home-redesign .home-services__mention {
+  color: var(--terracotta);
+  letter-spacing: 0.16em;
+}
+.home-services h3 {
+  font-size: clamp(1.85rem, 2.5vw, 2.65rem);
+  line-height: 1.17;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+  margin: 13px 0 17px;
+}
+.home-services__description {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--muted);
+  text-wrap: pretty;
+}
+.home-services__capacity {
+  margin-top: 17px;
+  font-size: 0.86rem;
+  text-wrap: balance;
+}
+.home-services .text-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin-top: 16px;
+}
+.home-services .text-link:focus-visible {
+  outline: 2px solid var(--green);
+  outline-offset: 5px;
+}
+.home-services__email-unavailable {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.home-services__catering {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: clamp(65px, 8vw, 125px);
+  padding-top: 42px;
+  border-top: 1px solid var(--line);
+}
+.home-services__catering h3 {
+  margin-bottom: 0;
+}
+.home-services__botanical {
+  position: absolute;
+  z-index: 0;
+  width: min(24vw, 350px);
+  height: auto;
+  bottom: 14%;
+  left: -6%;
+  opacity: 0.065;
+  transform: rotate(18deg);
+  pointer-events: none;
+  user-select: none;
+}
+@media (min-width: 801px) and (max-width: 1100px) {
+  .home-services { padding-block: 110px; }
+  .home-services__inner,
+  .home-services__catering { column-gap: 45px; }
+  .home-services__photo { margin-left: 0; }
+}
+@media (max-width: 800px) {
+  .home-services { padding-block: 90px 100px; }
+  .home-services__inner {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 45px;
+  }
+  .home-services__heading h2 {
+    font-size: clamp(3.4rem, 10vw, 4.7rem);
+    margin-bottom: 32px;
+  }
+  .home-services__photo {
+    width: 100%;
+    max-width: 410px;
+    margin-inline: auto;
+  }
+  .home-services__cake-image { transform: none; }
+  .home-services__occasions { padding-top: 0; gap: 45px; }
+  .home-services h3 { font-size: clamp(1.9rem, 7vw, 2.5rem); }
+  .home-services__description { font-size: 1rem; }
+  .home-services__catering {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 18px;
+    padding-top: 35px;
+  }
+  .home-services__botanical { width: 180px; left: -85px; bottom: 5%; }
+}
+
 .home-door,
 .home-door__image {
   min-height: 480px;

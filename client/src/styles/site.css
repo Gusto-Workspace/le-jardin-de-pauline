@@ -6589,3 +6589,27 @@ body:has(.home-redesign) .footer-bottom {
     color: var(--green);
   }
 }
+
+.reservation-intro__title-line {
+  display: block;
+}
+@media (max-width: 800px) {
+  .reservation-page-shell .reservation-intro h1 {
+    font-size: clamp(2.5rem, 10vw, 3.6rem);
+  }
+  .reservation-page-shell .reservation-intro__title-line {
+    white-space: nowrap;
+  }
+  .reservation-page-shell .reservation-intro > p,
+  .ambassade-booking__heading h2,
+  .ambassade-booking__heading > p {
+    text-wrap: balance;
+  }
+  .reservation-page-shell .reservation-intro > p > span {
+    display: block;
+    text-wrap: balance;
+  }
+  .reservation-page-shell .reservation-intro > p > span + span {
+    margin-top: 8px;
+  }
+}

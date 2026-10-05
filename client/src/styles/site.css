@@ -439,6 +439,11 @@ p {
 .footer-bottom a {
   font-size: 0.72rem;
 }
+.footer-bottom__credits {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
 .page-intro {
   padding: 66px 0 54px;
   max-width: 860px;
@@ -4804,7 +4809,12 @@ body:has(.home-redesign) .footer-bottom {
   }
   .footer-bottom {
     align-items: center;
+    flex-direction: column;
     text-align: center;
+  }
+  .footer-bottom__credits {
+    flex-direction: column;
+    gap: 10px;
   }
 }
 

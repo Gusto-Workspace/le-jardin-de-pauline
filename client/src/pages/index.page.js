@@ -412,14 +412,14 @@ function HomeDrinks() {
   return (
     <section className="home-drinks home-section container">
       <div {...revealProps(copy)} className={`home-drinks__copy home-title-host ${copy.className}`}>
-        <p className="eyebrow">Nos boissons</p>
+        <p className="eyebrow">Le coffee shop</p>
         <h2><TitleLine>Une pause,</TitleLine><TitleLine as="em" delay={90}>à boire aussi.</TitleLine></h2>
-        <p>Côté coffee shop, cafés, lattes, thés d’exception et créations maison rythment vos pauses, au fil des saisons.</p>
+        <p>Un café pour commencer la journée, un latte pour s’accorder une pause, un thé pour prolonger le plaisir. Les boissons du Jardin accompagnent chaque instant gourmand, du matin au goûter.</p>
         <Link className="text-link" href="/boissons">Découvrir nos boissons <span>↗</span></Link>
       </div>
       <div ref={collage} className="home-drinks__collage">
-        <div className="home-drinks__pink home-image-frame"><Image src="/img/home/drink-pink.webp" alt="Boisson rose fraîche avec tranche de citron" fill sizes="(max-width: 800px) 62vw, 25vw" /></div>
-        <div className="home-drinks__clear home-image-frame"><Image src="/img/home/drink-clear.webp" alt="Boisson pétillante aux agrumes" fill sizes="(max-width: 800px) 45vw, 18vw" /></div>
+        <div className="home-drinks__pink home-image-frame"><Image src="/img/home/drink-milk.jpg" alt="Boisson au lait maison servie dans un grand verre strié" fill sizes="(max-width: 800px) 62vw, 25vw" /></div>
+        <div className="home-drinks__clear home-image-frame"><Image src="/img/home/drink-pink.webp" alt="Boisson rose fraîche avec tranche de citron" fill sizes="(max-width: 800px) 45vw, 18vw" /></div>
         <div className="home-drinks__latte home-image-frame"><Image src="/img/home/drink-latte.webp" alt="Latte glacé servi au salon" fill sizes="(max-width: 800px) 48vw, 19vw" /></div>
         <div className="home-drinks__coffee home-image-frame"><Image src="/img/home/drink-coffee.webp" alt="Café versé sur une glace" fill sizes="(max-width: 800px) 48vw, 17vw" /></div>
       </div>

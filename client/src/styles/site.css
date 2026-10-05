@@ -6752,3 +6752,226 @@ body:has(.home-redesign) .footer-bottom {
     margin-top: 8px;
   }
 }
+
+/* Rappels terracotta subtils, répartis dans l'ensemble du site. */
+:root {
+  --terracotta: #b87966;
+}
+
+.home-redesign {
+  --terracotta: #b87966;
+  --home-terracotta: rgb(184 121 102 / 0.18);
+}
+
+.home-redesign .eyebrow,
+.news-hero__copy .eyebrow,
+.contact-page-intro .eyebrow {
+  color: var(--terracotta);
+}
+
+.home-redesign .home-leaf {
+  filter: sepia(0.12) saturate(0.78);
+}
+
+.home-redesign .home-secondary-btn,
+.home-redesign .home-secondary-btn:hover {
+  border-color: rgb(184 121 102 / 0.62);
+}
+
+.home-redesign .text-link {
+  border-color: rgb(184 121 102 / 0.55);
+}
+
+.home-redesign .home-final {
+  box-shadow: inset 0 1px 0 rgb(184 121 102 / 0.22);
+}
+
+.news-card__read,
+.news-modal__close,
+.contact-form-card:before,
+.garden-contact-success > svg {
+  color: var(--terracotta);
+}
+
+.news-card__copy {
+  border-left: 2px solid rgb(184 121 102 / 0.24);
+}
+
+.news-modal > article {
+  border-top: 2px solid rgb(184 121 102 / 0.65);
+}
+
+.contact-photo-frame:after {
+  background: rgb(184 121 102 / 0.24);
+}
+
+.header {
+  box-shadow: 0 1px 0 rgb(184 121 102 / 0.2);
+}
+
+.desktop-nav > .btn,
+.mobile-drawer > .btn {
+  background: var(--terracotta);
+  border-color: var(--terracotta);
+}
+
+.desktop-nav > .btn:hover,
+.mobile-drawer > .btn:hover {
+  background: #a96d5b;
+  border-color: #a96d5b;
+}
+
+body:has(.home-redesign) .footer {
+  box-shadow: inset 0 3px 0 rgb(184 121 102 / 0.75);
+}
+
+.reservation-page-shell {
+  background:
+    radial-gradient(ellipse at 100% 72%, rgb(184 121 102 / 0.07), transparent 36%),
+    linear-gradient(180deg, #faf8f2 0%, #f8f3ed 58%, #faf8f2 100%);
+}
+
+.reservation-page-shell .reservation-intro h1 em {
+  color: var(--terracotta);
+}
+
+.reservation-page-shell::before {
+  filter: sepia(0.2) saturate(0.82);
+  opacity: 0.14;
+}
+
+.ambassade-booking__main {
+  border-color: rgb(184 121 102 / 0.42);
+  background: linear-gradient(135deg, rgb(184 121 102 / 0.045), transparent 48%), #f1f1e9;
+}
+
+.ambassade-booking-steps button.is-active,
+.ambassade-booking-steps button.is-done {
+  color: var(--terracotta);
+  border-color: var(--terracotta);
+}
+
+.ambassade-guest-picker > div:focus-within,
+.ambassade-booking-field input:focus,
+.ambassade-customer-form__message textarea:focus {
+  outline: 2px solid rgb(184 121 102 / 0.42);
+  outline-offset: 2px;
+  border-color: var(--terracotta);
+}
+
+.ambassade-calendar .react-calendar {
+  border-color: rgb(184 121 102 / 0.32) !important;
+}
+
+.ambassade-calendar .react-calendar__tile--active {
+  background: var(--terracotta) !important;
+  color: white !important;
+}
+
+.ambassade-calendar .react-calendar__tile--now:not(.react-calendar__tile--active) {
+  background: rgb(184 121 102 / 0.1) !important;
+  color: #9f6655 !important;
+}
+
+.ambassade-meal-toggle button.is-active,
+.ambassade-time-picker button.is-active {
+  border-color: var(--terracotta);
+  background: var(--terracotta);
+  color: white;
+}
+
+.ambassade-booking__continue,
+.ambassade-customer-form__actions button:last-child {
+  border-color: var(--terracotta);
+  background: var(--terracotta);
+}
+
+.ambassade-booking__continue:hover,
+.ambassade-customer-form__actions button:last-child:hover {
+  border-color: #a96d5b;
+  background: #a96d5b;
+}
+
+.ambassade-booking-summary {
+  border-top: 3px solid var(--terracotta);
+}
+
+.ambassade-booking-summary .garden-ornament {
+  color: #e0b29e;
+}
+
+.ambassade-booking-summary__rule {
+  background: rgb(224 178 158 / 0.52);
+}
+
+.ambassade-booking-confirmation > svg,
+.ambassade-booking-confirmation > button {
+  color: var(--terracotta);
+}
+
+.ambassade-booking-confirmation > button {
+  border: 1px solid rgb(184 121 102 / 0.55);
+}
+
+.ambassade-booking-confirmation > button:hover {
+  background: rgb(184 121 102 / 0.08);
+}
+
+.flow-page {
+  background:
+    linear-gradient(rgb(250 248 242 / 0.88), rgb(250 248 242 / 0.88)),
+    radial-gradient(ellipse at 85% 80%, rgb(184 121 102 / 0.13), transparent 38%),
+    url("/img/home/hero.webp") center/cover;
+}
+
+.flow-panel {
+  border-color: rgb(184 121 102 / 0.34);
+  box-shadow: 0 18px 48px rgb(80 55 42 / 0.08);
+}
+
+.ambassade-bank-form__amount {
+  background: rgb(184 121 102 / 0.09);
+}
+
+.ambassade-flow-primary {
+  background: var(--terracotta);
+}
+
+.ambassade-flow-primary:hover {
+  background: #a96d5b;
+}
+
+.ambassade-flow-status > svg {
+  color: var(--terracotta);
+}
+
+.ambassade-flow-actions a {
+  border-color: rgb(184 121 102 / 0.65);
+}
+
+.ambassade-pending-modal__actions button:last-child {
+  border-color: var(--terracotta);
+  background: var(--terracotta);
+}
+
+.footer {
+  border-top: 1px solid rgb(184 121 102 / 0.35);
+}
+
+.carte-category__heading .eyebrow {
+  color: rgb(184 121 102 / 0.82);
+}
+
+.carte-dish {
+  border-bottom-color: rgb(184 121 102 / 0.22);
+}
+
+.carte-menu-group {
+  border-bottom-color: rgb(184 121 102 / 0.2);
+}
+
+@media (max-width: 800px) {
+  .ambassade-booking-summary {
+    border-top-width: 2px;
+  }
+}

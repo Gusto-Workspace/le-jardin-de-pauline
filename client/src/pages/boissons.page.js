@@ -1,4 +1,3 @@
-import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { useContext } from "react";
@@ -7,6 +6,7 @@ import { ApiState, Reveal, useScrollReveal } from "@/components/shared.component
 import { HomeBand } from "@/components/home-banners.component";
 import { GlobalContext } from "@/contexts/global.context";
 import { getDrinkSections, getWineSections } from "@/utils/restaurant";
+import SeoHead from "@/components/seo-head.component";
 
 export default function DrinksPage() {
   const { restaurantContext } = useContext(GlobalContext);
@@ -14,7 +14,7 @@ export default function DrinksPage() {
   const heroVisualReveal = useScrollReveal({ delay: 160, threshold: 0.05 });
   const drinks = getDrinkSections(restaurantContext.restaurantData);
   const wines = getWineSections(restaurantContext.restaurantData);
-  return <><Head><title>Les boissons · Le Jardin de Pauline</title><meta name="description" content="Thés, cafés, boissons fraîches et vins au Jardin de Pauline." /></Head><SiteShell>
+  return <><SeoHead title="Les boissons · Le Jardin de Pauline" description="Thés, cafés, boissons fraîches et vins au Jardin de Pauline." path="/boissons" image="/img/boissons/hero-verre.webp" /><SiteShell>
     <section className="carte-hero boissons-hero">
       <div className="carte-hero__plate" aria-hidden="true">
         <Image src="/img/boissons/hero-verre.webp" alt="" fill sizes="(max-width: 800px) 54vw, 380px" />

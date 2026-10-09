@@ -1,4 +1,3 @@
-import Head from "next/head";
 import Image from "next/image";
 import { Instagram as InstagramIcon } from "lucide-react";
 import { useContext } from "react";
@@ -8,6 +7,7 @@ import { HomeDoor } from "@/components/home-banners.component";
 import ContactForm from "@/components/contact-form.component";
 import { GlobalContext } from "@/contexts/global.context";
 import { getAddress, getHours, getSocialUrl } from "@/utils/restaurant";
+import SeoHead from "@/components/seo-head.component";
 
 export default function ContactPage() {
   const { restaurantContext } = useContext(GlobalContext);
@@ -16,7 +16,7 @@ export default function ContactPage() {
   const hours = getHours(restaurant);
   const instagram = getSocialUrl(restaurant, "instagram");
   const mapQuery = encodeURIComponent(address.join(" ") || "Le Jardin de Pauline Montauban");
-  return <><Head><title>Contact & accès · Le Jardin de Pauline</title><meta name="description" content="Adresse, horaires et contact du Jardin de Pauline à Montauban." /></Head><SiteShell>
+  return <><SeoHead title="Contact & accès · Le Jardin de Pauline" description="Adresse, horaires et contact du Jardin de Pauline à Montauban." path="/contact" image="/img/home/hero.webp" /><SiteShell>
     <Reveal as="section" className="page-intro container contact-page-intro">
       <div className="reservation-intro__ornament" aria-hidden="true">✦ <span>un moment rien qu’à vous</span> ✦</div>
       <h1>Bien caché.<br /><em>Tout près de vous.</em></h1>

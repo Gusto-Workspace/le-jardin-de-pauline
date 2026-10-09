@@ -1,4 +1,3 @@
-import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, X } from "lucide-react";
@@ -9,6 +8,7 @@ import { Reveal } from "@/components/shared.component";
 import { HomeBand } from "@/components/home-banners.component";
 import { GlobalContext } from "@/contexts/global.context";
 import { formatNewsDate, getVisibleNews } from "@/utils/news";
+import SeoHead from "@/components/seo-head.component";
 
 export default function NewsPage() {
   const router = useRouter();
@@ -49,10 +49,7 @@ export default function NewsPage() {
   }, [closeArticle, selected]);
 
   return <>
-    <Head>
-      <title>Actualités · Le Jardin de Pauline</title>
-      <meta name="description" content="Les nouvelles et les moments à partager au Jardin de Pauline, salon de thé à Montauban." />
-    </Head>
+    <SeoHead title="Actualités · Le Jardin de Pauline" description="Les nouvelles et les moments à partager au Jardin de Pauline, salon de thé à Montauban." path="/news" image="/img/home/door.webp" />
     <SiteShell>
       <div className="news-page">
         <section className="news-hero container" aria-labelledby="news-title">

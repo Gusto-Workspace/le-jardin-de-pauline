@@ -1,4 +1,3 @@
-import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { Fragment, useContext } from "react";
@@ -8,6 +7,7 @@ import { ApiState, Reveal, useScrollReveal } from "@/components/shared.component
 import { HomeBand, HomeDoor } from "@/components/home-banners.component";
 import { GlobalContext } from "@/contexts/global.context";
 import { formatPrice, getAddress, getDishSections, getHours, getMenus } from "@/utils/restaurant";
+import SeoHead from "@/components/seo-head.component";
 
 const featuredCategories = [
   {
@@ -67,10 +67,7 @@ export default function MenusPage() {
 
   return (
     <>
-      <Head>
-        <title>Carte & menus · Le Jardin de Pauline</title>
-        <meta name="description" content="Découvrez les assiettes, suggestions et formules du Jardin de Pauline à Montauban." />
-      </Head>
+      <SeoHead title="Carte & menus · Le Jardin de Pauline" description="Découvrez les assiettes, suggestions et formules du Jardin de Pauline à Montauban." path="/carte-menus" image="/img/carte-menus/hero-plate.webp" />
       <SiteShell>
         <div className="carte-page">
           <section className="carte-hero">

@@ -1,4 +1,3 @@
-import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { useContext, useEffect, useRef, useState } from "react";
@@ -6,6 +5,7 @@ import SiteShell from "@/components/site-shell.component";
 import { Reveal, useScrollReveal } from "@/components/shared.component";
 import { HomeBand, HomeDoor } from "@/components/home-banners.component";
 import { GlobalContext } from "@/contexts/global.context";
+import SeoHead from "@/components/seo-head.component";
 
 const revealProps = (reveal) => ({ ref: reveal.ref, style: reveal.style, className: reveal.className });
 
@@ -16,10 +16,7 @@ function TitleLine({ as: Element = "span", delay = 0, children }) {
 export default function HomePage() {
   return (
     <>
-      <Head>
-        <title>Salon de thé & brunch à Montauban · Le Jardin de Pauline</title>
-        <meta name="description" content="Le Jardin de Pauline, salon de thé, déjeuner, brunch et goûter au cœur de Montauban." />
-      </Head>
+      <SeoHead title="Salon de thé & brunch à Montauban · Le Jardin de Pauline" description="Le Jardin de Pauline, salon de thé, déjeuner, brunch et goûter au cœur de Montauban." path="/" />
       <SiteShell>
         <div className="home-redesign">
           <HomeHero />

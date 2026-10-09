@@ -14,7 +14,7 @@ export default function DrinksPage() {
   const heroVisualReveal = useScrollReveal({ delay: 160, threshold: 0.05 });
   const drinks = getDrinkSections(restaurantContext.restaurantData);
   const wines = getWineSections(restaurantContext.restaurantData);
-  return <><SeoHead title="Les boissons · Le Jardin de Pauline" description="Thés, cafés, boissons fraîches et vins au Jardin de Pauline." path="/boissons" image="/img/boissons/hero-verre.webp" /><SiteShell>
+  return <><SeoHead title="Les boissons · Le Jardin de Pauline" description="Thés, cafés, boissons fraîches et vins au Jardin de Pauline." path="/boissons" /><SiteShell>
     <section className="carte-hero boissons-hero">
       <div className="carte-hero__plate" aria-hidden="true">
         <Image src="/img/boissons/hero-verre.webp" alt="" fill sizes="(max-width: 800px) 54vw, 380px" />

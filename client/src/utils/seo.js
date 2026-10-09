@@ -1,6 +1,6 @@
 export const DEFAULT_SITE_NAME = "Le Jardin de Pauline";
-export const DEFAULT_SITE_URL = "http://localhost:8003";
-export const DEFAULT_SOCIAL_IMAGE = "/img/home/hero.webp";
+export const DEFAULT_SITE_URL = "https://lejardindepauline82.fr";
+export const DEFAULT_SOCIAL_IMAGE = "/open-graph.png";
 export const DEFAULT_LOGO_IMAGE = "/logo-couleur.webp";
 
 const schemaDays = {

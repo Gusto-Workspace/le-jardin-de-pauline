@@ -49,7 +49,7 @@ export default function NewsPage() {
   }, [closeArticle, selected]);
 
   return <>
-    <SeoHead title="Actualités · Le Jardin de Pauline" description="Les nouvelles et les moments à partager au Jardin de Pauline, salon de thé à Montauban." path="/news" image="/img/home/door.webp" />
+    <SeoHead title="Actualités · Le Jardin de Pauline" description="Les nouvelles et les moments à partager au Jardin de Pauline, salon de thé à Montauban." path="/news" />
     <SiteShell>
       <div className="news-page">
         <section className="news-hero container" aria-labelledby="news-title">

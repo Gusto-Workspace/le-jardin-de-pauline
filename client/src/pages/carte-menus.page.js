@@ -67,7 +67,7 @@ export default function MenusPage() {
 
   return (
     <>
-      <SeoHead title="Carte & menus · Le Jardin de Pauline" description="Découvrez les assiettes, suggestions et formules du Jardin de Pauline à Montauban." path="/carte-menus" image="/img/carte-menus/hero-plate.webp" />
+      <SeoHead title="Carte & menus · Le Jardin de Pauline" description="Découvrez les assiettes, suggestions et formules du Jardin de Pauline à Montauban." path="/carte-menus" />
       <SiteShell>
         <div className="carte-page">
           <section className="carte-hero">

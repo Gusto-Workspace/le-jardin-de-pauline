@@ -16,7 +16,7 @@ export default function ContactPage() {
   const hours = getHours(restaurant);
   const instagram = getSocialUrl(restaurant, "instagram");
   const mapQuery = encodeURIComponent(address.join(" ") || "Le Jardin de Pauline Montauban");
-  return <><SeoHead title="Contact & accès · Le Jardin de Pauline" description="Adresse, horaires et contact du Jardin de Pauline à Montauban." path="/contact" image="/img/home/hero.webp" /><SiteShell>
+  return <><SeoHead title="Contact & accès · Le Jardin de Pauline" description="Adresse, horaires et contact du Jardin de Pauline à Montauban." path="/contact" /><SiteShell>
     <Reveal as="section" className="page-intro container contact-page-intro">
       <div className="reservation-intro__ornament" aria-hidden="true">✦ <span>un moment rien qu’à vous</span> ✦</div>
       <h1>Bien caché.<br /><em>Tout près de vous.</em></h1>

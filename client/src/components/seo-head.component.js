@@ -49,7 +49,6 @@ export default function SeoHead({
       <meta name="apple-mobile-web-app-title" content={DEFAULT_SITE_NAME} />
       <meta name="theme-color" content="#667d67" />
       <meta name="format-detection" content="telephone=yes, address=yes, email=yes" />
-      <link rel="icon" href="/favicon.svg" />
       {!noIndex ? <link rel="canonical" href={canonicalUrl} /> : null}
       {!noIndex ? <link rel="alternate" hrefLang="fr-FR" href={canonicalUrl} /> : null}
       {!noIndex ? <link rel="alternate" hrefLang="x-default" href={canonicalUrl} /> : null}
@@ -62,6 +61,9 @@ export default function SeoHead({
       <meta property="og:url" content={canonicalUrl} />
       <meta property="og:image" content={imageUrl} />
       <meta property="og:image:secure_url" content={imageUrl} />
+      <meta property="og:image:type" content="image/png" />
+      <meta property="og:image:width" content="993" />
+      <meta property="og:image:height" content="713" />
       <meta property="og:image:alt" content={title} />
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={title} />
